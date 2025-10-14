@@ -1,0 +1,486 @@
+/* Unique Backgrounds for Each Module */
+
+/* Dashboard Module */
+.dashboard-background {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+}
+
+/* Upload Module */
+.upload-background {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.2) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255,255,255,0.2) 0%, transparent 50%);
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Ontology Generator Module */
+.ontology-background {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.ontology-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.3)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.2)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.4)"/><circle cx="60" cy="60" r="1.5" fill="rgba(255,255,255,0.3)"/></svg>');
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+/* Entity Resolution Module */
+.entity-background {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.entity-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255,255,255,0.1) 10px,
+    rgba(255,255,255,0.1) 20px
+  );
+  animation: slide 3s linear infinite;
+}
+
+/* Embedding Generator Module */
+.embedding-background {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.embedding-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,50 Q25,25 50,50 T100,50" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"/><path d="M0,30 Q25,55 50,30 T100,30" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/></svg>');
+  animation: wave 5s ease-in-out infinite;
+}
+
+/* Graph Constructor Module */
+.graph-background {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.graph-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><line x1="0" y1="0" x2="100" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line x1="100" y1="0" x2="0" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.4)"/></svg>');
+  animation: rotate 8s linear infinite;
+}
+
+/* Knowledge Graph Module */
+.knowledge-background {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.knowledge-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="80" cy="20" r="2" fill="rgba(255,255,255,0.2)"/><circle cx="20" cy="80" r="2" fill="rgba(255,255,255,0.2)"/><circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.3)"/><circle cx="50" cy="50" r="4" fill="rgba(255,255,255,0.4)"/><line x1="20" y1="20" x2="50" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line x1="80" y1="20" x2="50" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line x1="20" y1="80" x2="50" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line x1="80" y1="80" x2="50" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="1"/></svg>');
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* Core Modules Dashboard */
+.core-modules-background {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.core-modules-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.3)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Agentic Retrieval Module */
+.retrieval-background {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.retrieval-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,20 50,50 T90,50" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/><path d="M10,30 Q30,60 50,30 T90,30" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none"/><path d="M10,70 Q30,40 50,70 T90,70" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none"/></svg>');
+  animation: flow 6s ease-in-out infinite;
+}
+
+/* Reasoning Stream Module */
+.reasoning-background {
+  background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.reasoning-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.4)"/><circle cx="75" cy="25" r="1.5" fill="rgba(255,255,255,0.3)"/><circle cx="25" cy="75" r="1.5" fill="rgba(255,255,255,0.3)"/><circle cx="75" cy="75" r="2" fill="rgba(255,255,255,0.4)"/><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.5)"/><path d="M25,25 L50,50 L75,25" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none"/><path d="M25,75 L50,50 L75,75" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none"/></svg>');
+  animation: connect 5s ease-in-out infinite;
+}
+
+/* AI ChatBot Module */
+.chatbot-background {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.chatbot-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="30" cy="30" r="2" fill="rgba(255,255,255,0.3)"/><circle cx="70" cy="30" r="2" fill="rgba(255,255,255,0.3)"/><path d="M20,60 Q30,70 40,60 Q50,50 60,60 Q70,70 80,60" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/></svg>');
+  animation: smile 4s ease-in-out infinite;
+}
+
+/* Live Query Console Module */
+.console-background {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.console-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="10" width="80" height="60" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/><line x1="20" y1="30" x2="80" y2="30" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line x1="20" y1="40" x2="60" y2="40" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><line x1="20" y1="50" x2="70" y2="50" stroke="rgba(255,255,255,0.3)" stroke-width="1"/></svg>');
+  animation: blink 2s ease-in-out infinite;
+}
+
+/* Settings Module */
+.settings-background {
+  background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.settings-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="20" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/><circle cx="50" cy="50" r="10" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.4)"/></svg>');
+  animation: rotate 10s linear infinite;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes wave {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.6; }
+}
+
+@keyframes flow {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(10px); }
+}
+
+@keyframes connect {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes smile {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.2); }
+}
+
+@keyframes blink {
+  0%, 90%, 100% { opacity: 0.3; }
+  95% { opacity: 0.8; }
+}
+
+/* Module-specific content styling */
+.module-content {
+  position: relative;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  min-height: calc(100vh - 140px);
+}
+
+/* Headings - Very visible white text */
+.module-content h1,
+.module-content h2,
+.module-content h3 {
+  color: #ffffff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.module-content h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.module-content h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.module-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* Paragraphs - Bright white with strong shadow */
+.module-content p {
+  color: #ffffff !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Spans and labels - Bright white */
+.module-content span {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+}
+
+/* All text elements - Force white with strong shadows */
+.module-content * {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Button styling - High contrast */
+.module-content button {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  font-weight: 600;
+}
+
+.module-content button:hover {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Input fields - High contrast */
+.module-content input {
+  color: #ffffff !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 2px solid rgba(255, 255, 255, 0.5) !important;
+  font-weight: 500;
+}
+
+.module-content input::placeholder {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 500;
+}
+
+/* Labels and form elements */
+.module-content label {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+}
+
+/* Links */
+.module-content a {
+  color: #60a5fa !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+}
+
+.module-content a:hover {
+  color: #93c5fd !important;
+}
+
+/* Status indicators */
+.module-content .status {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+}
+
+/* Progress bars and indicators */
+.module-content .progress {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Cards and containers */
+.module-content .card {
+  background: rgba(0, 0, 0, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Icons */
+.module-content svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+/* Override any remaining transparent text */
+.module-content *:not(button):not(input) {
+  color: #ffffff !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Module-specific improvements */
+.dashboard-module {
+  background: rgba(15, 23, 42, 0.9);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+}
+
+.upload-module {
+  background: rgba(16, 185, 129, 0.1);
+  border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.core-modules-module {
+  background: rgba(245, 158, 11, 0.1);
+  border: 2px solid rgba(245, 158, 11, 0.3);
+}
+
+.knowledge-graph-module {
+  background: rgba(132, 204, 22, 0.1);
+  border: 2px solid rgba(132, 204, 22, 0.3);
+}
+
+.reasoning-module {
+  background: rgba(139, 92, 246, 0.1);
+  border: 2px solid rgba(139, 92, 246, 0.3);
+}
+
+/* Improved grid layout for dashboard */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+/* Better spacing and layout */
+.content-wrapper {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.main-content {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+}

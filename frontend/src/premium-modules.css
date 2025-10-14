@@ -1,0 +1,70 @@
+/* Premium module visuals for dark theme */
+:root {
+  --pm-bg: rgba(15, 23, 42, 0.75); /* slate-900/75 */
+  --pm-border: rgba(100, 116, 139, 0.5); /* gray-600/50 */
+  --pm-muted: rgba(30, 41, 59, 0.7); /* slate-800/70 */
+  --pm-shadow: 0 10px 25px rgba(0,0,0,0.35);
+  --pm-shadow-sm: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.premium-card {
+  background: var(--pm-bg);
+  border: 1px solid var(--pm-border);
+  border-radius: 16px; /* rounded-2xl */
+  padding: 1.25rem; /* p-5 */
+  box-shadow: var(--pm-shadow);
+  backdrop-filter: saturate(120%) blur(6px);
+}
+
+.premium-card.shadow-sm { box-shadow: var(--pm-shadow-sm); }
+.premium-card.muted { background: var(--pm-muted); }
+
+/* Segmented control */
+.segmented {
+  display: inline-flex;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(100, 116, 139, 0.5);
+  border-radius: 12px;
+  padding: 4px;
+}
+.segmented button {
+  border: 0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #CBD5E1; /* slate-300 */
+  background: transparent;
+  cursor: pointer;
+}
+.segmented button.active { background: #2563EB; color: white; }
+.segmented button:not(.active):hover { background: rgba(148, 163, 184, 0.15); }
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(90deg, #2563EB, #7C3AED);
+  color: white;
+  border: 0;
+  padding: 10px 18px;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(37,99,235,0.35);
+}
+.btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+
+.btn-secondary {
+  background: rgba(51,65,85,.85);
+  color: #E2E8F0;
+  border: 1px solid rgba(100,116,139,.5);
+  padding: 10px 16px;
+  border-radius: 10px;
+}
+.btn-secondary:hover { background: rgba(71,85,105,.9); }
+
+/* Stat cards */
+.stat-premium {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(100,116,139,.45);
+  border-radius: 14px;
+  padding: 1rem;
+}
+.stat-premium .label { color: #94A3B8; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+.stat-premium .value { color: white; font-weight: 700; font-size: 1.4rem; }
