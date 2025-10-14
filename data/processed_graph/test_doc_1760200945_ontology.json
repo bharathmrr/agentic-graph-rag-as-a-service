@@ -1,0 +1,89 @@
+{
+  "entities": [
+    {
+      "id": "1",
+      "name": "John",
+      "type": "Person",
+      "description": "Employee at Google",
+      "attributes": {}
+    },
+    {
+      "id": "2",
+      "name": "Google",
+      "type": "Organization",
+      "description": "Technology company",
+      "attributes": {}
+    },
+    {
+      "id": "3",
+      "name": "California",
+      "type": "Location",
+      "description": "US state",
+      "attributes": {}
+    },
+    {
+      "id": "4",
+      "name": "Test",
+      "type": "Concept",
+      "description": "Simple test",
+      "attributes": {}
+    },
+    {
+      "id": "5",
+      "name": "This",
+      "type": "Concept",
+      "description": "Introduction to test",
+      "attributes": {}
+    },
+    {
+      "id": "6",
+      "name": "Simple",
+      "type": "Concept",
+      "description": "Description of test",
+      "attributes": {}
+    },
+    {
+      "id": "7",
+      "name": "CRITICAL",
+      "type": "Concept",
+      "description": "Important note",
+      "attributes": {}
+    },
+    {
+      "id": "8",
+      "name": "JSON",
+      "type": "Concept",
+      "description": "Data format",
+      "attributes": {}
+    },
+    {
+      "id": "9",
+      "name": "Required",
+      "type": "Concept",
+      "description": "Format requirements",
+      "attributes": {}
+    },
+    {
+      "id": "10",
+      "name": "Format",
+      "type": "Concept",
+      "description": "Data structure",
+      "attributes": {}
+    }
+  ],
+  "relationships": [
+    {
+      "source": "John",
+      "target": "Google",
+      "type": "WORKS_FOR",
+      "properties": {}
+    },
+    {
+      "source": "Google",
+      "target": "California",
+      "type": "LOCATED_IN",
+      "properties": {}
+    }
+  ],
+  "hierarchies": []
+}

@@ -1,0 +1,11 @@
+
+    Apple Inc. is a multinational technology company founded by Steve Jobs, Steve Wozniak, and Ronald Wayne in 1976.
+    The company is headquartered in Cupertino, California and is known for innovative products like the iPhone, iPad, and Mac computers.
+    
+    Microsoft Corporation was founded by Bill Gates and Paul Allen in 1975. The company develops software, services, and devices.
+    Microsoft is headquartered in Redmond, Washington and is famous for Windows operating system and Office productivity suite.
+    
+    Google LLC was created by Larry Page and Sergey Brin while they were PhD students at Stanford University.
+    Google's headquarters, known as Googleplex, is located in Mountain View, California.
+    The company specializes in Internet-related services and products.
+    
