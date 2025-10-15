@@ -1,0 +1,101 @@
+{
+  "entities": [
+    {
+      "id": "entity_0",
+      "name": "Python",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_1",
+      "name": "Technology",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_2",
+      "name": "Programming",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_3",
+      "name": "Generative",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_4",
+      "name": "Concept",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_5",
+      "name": "Artificial",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_6",
+      "name": "Organization",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_7",
+      "name": "Online",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_8",
+      "name": "Video",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_9",
+      "name": "Machine",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    }
+  ],
+  "relationships": [
+    {
+      "source": "Python",
+      "target": "Technology",
+      "type": "RELATED_TO",
+      "properties": {
+        "context": "extracted relationship"
+      }
+    },
+    {
+      "source": "Technology",
+      "target": "Programming",
+      "type": "RELATED_TO",
+      "properties": {
+        "context": "extracted relationship"
+      }
+    },
+    {
+      "source": "Programming",
+      "target": "Generative",
+      "type": "RELATED_TO",
+      "properties": {
+        "context": "extracted relationship"
+      }
+    }
+  ],
+  "hierarchies": []
+}
