@@ -53,7 +53,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-      target: development
+      target: base
     container_name: agentic-backend
     restart: unless-stopped
     ports:
@@ -92,7 +92,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-      target: development
+      target: base
     container_name: agentic-frontend
     restart: unless-stopped
     ports:
