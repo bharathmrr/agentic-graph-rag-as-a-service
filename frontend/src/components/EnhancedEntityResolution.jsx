@@ -11,10 +11,10 @@ import {
   Loader,
   BarChart3,
   Target,
-  Zap
+  Zap,
+  ArrowLeft
 } from 'lucide-react'
 import { useData } from '../context/DataContext'
-import ProfessionalModuleWrapper from './ProfessionalModuleWrapper'
 
 const EnhancedEntityResolution = ({ onNotification, onBack, onResolutionComplete }) => {
   // Step 3 specific states
@@ -217,53 +217,58 @@ const EnhancedEntityResolution = ({ onNotification, onBack, onResolutionComplete
   }
 
   const renderResolutionControls = () => (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-className="premium-card mb-6"
-    >
+    <div className="premium-card">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-white flex items-center">
-          <Search className="w-5 h-5 mr-2 text-orange-400" />
-          Entity Resolution
-        </h3>
+        <h3 className="section-title">Controls</h3>
         
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-2">
           {backendStatus === 'online' ? (
-            <div className="flex items-center space-x-2 text-green-400">
-              <CheckCircle className="w-4 h-4" />
-              <span className="text-sm">Backend Ready</span>
-            </div>
+            <span className="status-chip success">
+              <CheckCircle size={14} />
+              Backend Online
+            </span>
           ) : (
-            <div className="flex items-center space-x-2 text-red-400">
-              <AlertTriangle className="w-4 h-4" />
-              <span className="text-sm">Backend Offline</span>
-            </div>
+            <span className="status-chip error">
+              <AlertTriangle size={14} />
+              Backend Offline
+            </span>
           )}
         </div>
       </div>
       
       {ontologyData && (
-<div className="premium-card muted mb-4">
-          <h4 className="text-sm font-medium text-gray-300 mb-2">Source Data</h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-blue-400">{Object.keys(ontologyData.entities || {}).length}</p>
-              <p className="text-xs text-gray-400">Entity Types</p>
+        <div className="premium-card muted mb-4">
+          <h4 className="section-subtitle mb-4">Source Data Summary</h4>
+          <div className="stats-grid">
+            <div className="stat-premium">
+              <div className="stat-icon">
+                <Target size={16} />
+              </div>
+              <div className="stat-label">Entity Types</div>
+              <div className="stat-value">{Object.keys(ontologyData.entities || {}).length}</div>
             </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-green-400">
+            <div className="stat-premium">
+              <div className="stat-icon">
+                <Users size={16} />
+              </div>
+              <div className="stat-label">Total Entities</div>
+              <div className="stat-value">
                 {Object.values(ontologyData.entities || {}).reduce((sum, data) => sum + (data.count || data.items?.length || 0), 0)}
-              </p>
-              <p className="text-xs text-gray-400">Total Entities</p>
+              </div>
             </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-purple-400">{ontologyData.relationships?.length || 0}</p>
-              <p className="text-xs text-gray-400">Relationships</p>
+            <div className="stat-premium">
+              <div className="stat-icon">
+                <BarChart3 size={16} />
+              </div>
+              <div className="stat-label">Relationships</div>
+              <div className="stat-value">{ontologyData.relationships?.length || 0}</div>
             </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-orange-400">Ready</p>
-              <p className="text-xs text-gray-400">Status</p>
+            <div className="stat-premium">
+              <div className="stat-icon">
+                <CheckCircle size={16} />
+              </div>
+              <div className="stat-label">Status</div>
+              <div className="stat-value">Ready</div>
             </div>
           </div>
         </div>
@@ -272,27 +277,20 @@ className="premium-card mb-6"
       {isLoading && (
         <div className="mb-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-gray-400">{processingStage}</span>
+            <span className="text-sm text-muted">{processingStage}</span>
             <span className="text-sm text-orange-400">{resolutionProgress}%</span>
           </div>
-          <div className="w-full bg-gray-700 rounded-full h-2">
-            <motion.div
-              className="bg-gradient-to-r from-orange-500 to-red-500 h-2 rounded-full"
-              initial={{ width: 0 }}
-              animate={{ width: `${resolutionProgress}%` }}
-              transition={{ duration: 0.3 }}
-            />
+          <div className="progress-bar">
+            <div className="progress-fill" style={{ width: `${resolutionProgress}%` }}></div>
           </div>
         </div>
       )}
       
       <div className="flex items-center space-x-3">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <button
           onClick={handleResolveEntities}
           disabled={isLoading || !ontologyData || backendStatus !== 'online'}
-          className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 disabled:from-gray-600 disabled:to-gray-700 text-white rounded-lg font-medium transition-all duration-200"
+          className="btn-primary"
         >
           {isLoading ? (
             <Loader className="w-4 h-4 animate-spin" />
@@ -300,21 +298,19 @@ className="premium-card mb-6"
             <Play className="w-4 h-4" />
           )}
           <span>{isLoading ? 'Resolving...' : 'Resolve Entities'}</span>
-        </motion.button>
+        </button>
         
         {entityData && (
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={exportResults}
-            className="flex items-center space-x-2 px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-all duration-200"
+            className="btn-secondary"
           >
             <Download className="w-4 h-4" />
             <span>Export</span>
-          </motion.button>
+          </button>
         )}
       </div>
-    </motion.div>
+    </div>
   )
 
   const renderResolutionResults = () => {
@@ -323,80 +319,60 @@ className="premium-card mb-6"
     const { totalDuplicates, highConfidence, totalEntities } = getResolutionStats()
     
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-6"
-      >
+      <div className="space-y-6">
         {/* Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-gradient-to-br from-orange-600/20 to-orange-800/20 border border-orange-500/30 rounded-xl p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-orange-300 text-sm">Duplicate Groups</p>
-                <p className="text-2xl font-bold text-white">{totalDuplicates}</p>
-              </div>
-              <Target className="w-8 h-8 text-orange-400" />
+        <div className="stats-grid">
+          <div className="stat-premium">
+            <div className="stat-icon">
+              <Target size={16} />
             </div>
+            <div className="stat-label">Duplicate Groups</div>
+            <div className="stat-value">{totalDuplicates}</div>
           </div>
           
-          <div className="bg-gradient-to-br from-green-600/20 to-green-800/20 border border-green-500/30 rounded-xl p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-green-300 text-sm">High Confidence</p>
-                <p className="text-2xl font-bold text-white">{highConfidence}</p>
-              </div>
-              <CheckCircle className="w-8 h-8 text-green-400" />
+          <div className="stat-premium">
+            <div className="stat-icon">
+              <CheckCircle size={16} />
             </div>
+            <div className="stat-label">High Confidence</div>
+            <div className="stat-value">{highConfidence}</div>
           </div>
           
-          <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 border border-blue-500/30 rounded-xl p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-blue-300 text-sm">Entities Processed</p>
-                <p className="text-2xl font-bold text-white">{totalEntities}</p>
-              </div>
-              <Users className="w-8 h-8 text-blue-400" />
+          <div className="stat-premium">
+            <div className="stat-icon">
+              <Users size={16} />
             </div>
+            <div className="stat-label">Entities Processed</div>
+            <div className="stat-value">{totalEntities}</div>
           </div>
         </div>
         
         {/* Duplicate Groups */}
-<div className="premium-card">
+        <div className="premium-card">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-white">Detected Duplicates</h3>
-            <div className="flex items-center space-x-2 text-sm text-gray-400">
-              <div className="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
-              <span>Using <span className="text-orange-400 font-medium">Fuzzy Matching</span></span>
-            </div>
+            <h3 className="section-title">Duplicate Groups</h3>
+            <span className="status-chip processing">
+              Fuzzy Matching
+            </span>
           </div>
           
           {entityData.duplicates && entityData.duplicates.length > 0 ? (
             <div className="space-y-4">
               {entityData.duplicates.map((duplicate, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-className="premium-card muted p-4"
-                >
+                <div key={index} className="premium-card muted">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center space-x-3">
-                      <div className="flex items-center space-x-2">
-                        <Target className="w-4 h-4 text-orange-400" />
-                        <span className="text-white font-medium">Duplicate Group {index + 1}</span>
-                      </div>
-                      <div className={`px-3 py-1 rounded-lg text-xs font-bold ${getConfidenceColor(duplicate.confidence)} bg-gray-800/50 border ${
-                        duplicate.confidence >= 0.8 ? 'border-green-500/30' :
-                        duplicate.confidence >= 0.6 ? 'border-yellow-500/30' :
-                        'border-red-500/30'
-                      }`}>
-                        🎯 {getConfidenceLabel(duplicate.confidence)} Match ({(duplicate.confidence * 100).toFixed(1)}%)
-                      </div>
+                      <Target className="w-4 h-4 text-orange-400" />
+                      <span className="file-name">Duplicate Group {index + 1}</span>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <span className="text-gray-400 text-sm">{duplicate.entities?.length || 0} similar entities</span>
+                      <span className={`status-chip ${
+                        duplicate.confidence >= 0.8 ? 'success' :
+                        duplicate.confidence >= 0.6 ? 'warning' : 'error'
+                      }`}>
+                        {getConfidenceLabel(duplicate.confidence)} ({(duplicate.confidence * 100).toFixed(1)}%)
+                      </span>
+                      <span className="text-muted text-sm">{duplicate.entities?.length || 0} entities</span>
                     </div>
                   </div>
                   
@@ -441,63 +417,54 @@ className="premium-card muted p-4"
                       </p>
                     </div>
                   )}
-                </motion.div>
+                </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", duration: 0.5 }}
-              >
-                <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
-              </motion.div>
-              <h4 className="text-2xl font-bold text-white mb-3">✅ All Entities are Unique!</h4>
-              <p className="text-gray-400 text-lg mb-4">No duplicate entities detected through fuzzy matching.</p>
-<div className="inline-flex items-center space-x-2 px-4 py-2 bg-green-900/40 border border-green-500/40 rounded-lg shadow">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-green-400 font-medium">Data Quality: Excellent</span>
-              </div>
+            <div className="empty-state">
+              <CheckCircle className="empty-state-icon text-green-400" />
+              <h4 className="empty-state-title">All Entities are Unique!</h4>
+              <p className="empty-state-description">No duplicate entities detected through fuzzy matching.</p>
+              <span className="status-chip success">Data Quality: Excellent</span>
             </div>
           )}
         </div>
         
         {/* Resolution Summary */}
         {entityData.summary && (
-          <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Resolution Summary</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="premium-card">
+            <h3 className="section-title">Resolution Summary</h3>
+            <div className="content-grid two-column">
               <div>
-                <h4 className="text-sm font-medium text-gray-300 mb-2">Processing Details</h4>
+                <h4 className="section-subtitle">Processing Details</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Entities Analyzed:</span>
+                    <span className="text-muted">Entities Analyzed:</span>
                     <span className="text-white">{entityData.summary.entitiesAnalyzed || 0}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Comparisons Made:</span>
+                    <span className="text-muted">Comparisons Made:</span>
                     <span className="text-white">{entityData.summary.comparisons || 0}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Processing Time:</span>
+                    <span className="text-muted">Processing Time:</span>
                     <span className="text-white">{entityData.summary.processingTime || 'N/A'}</span>
                   </div>
                 </div>
               </div>
               <div>
-                <h4 className="text-sm font-medium text-gray-300 mb-2">Quality Metrics</h4>
+                <h4 className="section-subtitle">Quality Metrics</h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Average Confidence:</span>
+                    <span className="text-muted">Average Confidence:</span>
                     <span className="text-white">{entityData.summary.avgConfidence || 'N/A'}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Unique Entities:</span>
+                    <span className="text-muted">Unique Entities:</span>
                     <span className="text-white">{entityData.summary.uniqueEntities || 0}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-400">Duplicate Rate:</span>
+                    <span className="text-muted">Duplicate Rate:</span>
                     <span className="text-white">{entityData.summary.duplicateRate || '0%'}</span>
                   </div>
                 </div>
@@ -505,20 +472,37 @@ className="premium-card muted p-4"
             </div>
           </div>
         )}
-      </motion.div>
+      </div>
     )
   }
 
   return (
-    <ProfessionalModuleWrapper
-      moduleId="entity-resolution"
-      moduleName="Entity Resolution"
-      moduleIcon={Search}
-      moduleColor="#f59e0b"
-      onBack={onBack}
-      requiresData={true}
-      dataType="ontology"
-    >
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      {/* Header */}
+      <div className="premium-card mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={onBack}
+              className="btn-secondary"
+            >
+              <ArrowLeft size={18} />
+              <span>Back</span>
+            </button>
+            
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center">
+                <Search size={20} className="text-white" />
+              </div>
+              <div>
+                <h1 className="section-title">Entity Resolution</h1>
+                <p className="text-muted">Remove duplicates with fuzzy matching and NLP</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="space-y-6">
         {renderResolutionControls()}
         
@@ -527,20 +511,16 @@ className="premium-card muted p-4"
         </AnimatePresence>
         
         {error && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-red-500/10 border border-red-500/30 rounded-xl p-4"
-          >
-            <div className="flex items-center space-x-2">
+          <div className="premium-card">
+            <div className="flex items-center space-x-2 mb-2">
               <XCircle className="w-5 h-5 text-red-400" />
               <span className="text-red-300 font-medium">Error</span>
             </div>
-            <p className="text-red-200 mt-2">{error}</p>
-          </motion.div>
+            <p className="text-red-200">{error}</p>
+          </div>
         )}
       </div>
-    </ProfessionalModuleWrapper>
+    </div>
   )
 }
 

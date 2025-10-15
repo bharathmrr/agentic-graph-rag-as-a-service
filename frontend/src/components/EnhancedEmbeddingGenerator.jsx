@@ -13,10 +13,10 @@ import {
   Loader,
   Filter,
   Eye,
-  Target
+  Target,
+  ArrowLeft
 } from 'lucide-react'
 import { useData } from '../context/DataContext'
-import ProfessionalModuleWrapper from './ProfessionalModuleWrapper'
 
 const EnhancedEmbeddingGenerator = ({ onNotification, onBack, onEmbeddingComplete }) => {
   // Step 4 specific states
@@ -559,15 +559,32 @@ const EnhancedEmbeddingGenerator = ({ onNotification, onBack, onEmbeddingComplet
   }
 
   return (
-    <ProfessionalModuleWrapper
-      moduleId="embeddings"
-      moduleName="Embedding Generator"
-      moduleIcon={Database}
-      moduleColor="#06b6d4"
-      onBack={onBack}
-      requiresData={true}
-      dataType="entities"
-    >
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      {/* Header */}
+      <div className="premium-card mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={onBack}
+              className="btn-secondary"
+            >
+              <ArrowLeft size={18} />
+              <span>Back</span>
+            </button>
+            
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center">
+                <Database size={20} className="text-white" />
+              </div>
+              <div>
+                <h1 className="section-title">Embedding Generator</h1>
+                <p className="text-muted">Convert content to vectors using Ollama + ChromaDB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="space-y-6">
         {renderGenerationControls()}
         
@@ -581,20 +598,16 @@ const EnhancedEmbeddingGenerator = ({ onNotification, onBack, onEmbeddingComplet
         </AnimatePresence>
         
         {error && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-red-500/10 border border-red-500/30 rounded-xl p-4"
-          >
-            <div className="flex items-center space-x-2">
+          <div className="premium-card">
+            <div className="flex items-center space-x-2 mb-2">
               <AlertTriangle className="w-5 h-5 text-red-400" />
               <span className="text-red-300 font-medium">Error</span>
             </div>
-            <p className="text-red-200 mt-2">{error}</p>
-          </motion.div>
+            <p className="text-red-200">{error}</p>
+          </div>
         )}
       </div>
-    </ProfessionalModuleWrapper>
+    </div>
   )
 }
 

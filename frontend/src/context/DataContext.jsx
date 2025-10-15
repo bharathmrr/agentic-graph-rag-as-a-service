@@ -21,6 +21,7 @@ export const DataProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [backendStatus, setBackendStatus] = useState('checking')
+  const [hasDocuments, setHasDocuments] = useState(false)
 
   const API_BASE = 'http://localhost:8000'
 
@@ -59,6 +60,7 @@ export const DataProvider = ({ children }) => {
       }
       
       setDocuments(prev => [...prev, newDoc])
+      setHasDocuments(true)
       return response.data
     } catch (error) {
       setError(error.response?.data?.detail || 'Upload failed')
@@ -220,6 +222,7 @@ export const DataProvider = ({ children }) => {
     isLoading,
     error,
     backendStatus,
+    hasDocuments,
     
     // Actions
     uploadDocument,

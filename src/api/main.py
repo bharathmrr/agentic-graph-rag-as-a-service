@@ -13,9 +13,22 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 import structlog
 
-from src.api.routes import ingestion_routes, retrieval_routes, ontology_routes
-from src.utils.config_loader import ConfigLoader
-from src.utils.logger import setup_logging
+import sys
+from pathlib import Path
+
+# Add the project root to Python path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+try:
+    from src.api.routes import ingestion_routes, retrieval_routes, ontology_routes, simple_upload_routes
+    from src.utils.config_loader import ConfigLoader
+    from src.utils.logger import setup_logging
+except ImportError:
+    # Fallback to relative imports
+    from .routes import ingestion_routes, retrieval_routes, ontology_routes, simple_upload_routes
+    from ..utils.config_loader import ConfigLoader
+    from ..utils.logger import setup_logging
 
 # Setup structured logging
 logger = setup_logging()
@@ -159,6 +172,87 @@ app.include_router(
     prefix="/api/ontology",
     tags=["Ontology"]
 )
+
+# Include Chatbot and Enhanced File Processing routes (Steps 10-12)
+try:
+    from src.api.routes import chatbot_routes
+    app.include_router(
+        chatbot_routes.router,
+        prefix="/api",
+        tags=["Chatbot & Files"]
+    )
+    logger.info("Chatbot & File routes loaded successfully")
+except ImportError as e:
+    logger.warning("Chatbot & File routes not available", error=str(e))
+
+app.include_router(
+    simple_upload_routes.router,
+    prefix="/api",
+    tags=["Upload"]
+)
+
+# Include comprehensive enhanced routes
+try:
+    from src.api.routes import comprehensive_api_routes
+    app.include_router(
+        comprehensive_api_routes.router,
+        prefix="/api/v2",
+        tags=["Enhanced API v2"]
+    )
+except ImportError:
+    try:
+        from .routes import comprehensive_api_routes
+        app.include_router(
+            comprehensive_api_routes.router,
+            prefix="/api/v2",
+            tags=["Enhanced API v2"]
+        )
+    except ImportError:
+        logger.warning("Comprehensive API routes not available")
+
+# Include progress streaming routes
+try:
+    from src.api.routes import progress_streaming
+    app.include_router(
+        progress_streaming.router,
+        prefix="/api/v2",
+        tags=["Progress Streaming"]
+    )
+except ImportError:
+    try:
+        from .routes import progress_streaming
+        app.include_router(
+            progress_streaming.router,
+            prefix="/api/v2",
+            tags=["Progress Streaming"]
+        )
+    except ImportError:
+        logger.warning("Progress streaming routes not available")
+
+# Include Groq integration routes
+try:
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', 'backend'))
+    from backend.routes import groq_routes
+    app.include_router(
+        groq_routes.router,
+        tags=["Groq Integration"]
+    )
+    logger.info("Groq routes loaded successfully")
+except ImportError as e:
+    logger.warning("Groq routes not available", error=str(e))
+
+# Include Enhanced Processing routes
+try:
+    from backend.routes import enhanced_processing_routes
+    app.include_router(
+        enhanced_processing_routes.router,
+        tags=["Enhanced Processing"]
+    )
+    logger.info("Enhanced processing routes loaded successfully")
+except ImportError as e:
+    logger.warning("Enhanced processing routes not available", error=str(e))
 
 
 if __name__ == "__main__":

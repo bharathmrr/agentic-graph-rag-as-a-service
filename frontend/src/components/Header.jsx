@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Menu, X, Zap, Activity, Upload, Plus } from 'lucide-react'
+import { Menu, X, Zap, Activity, Upload, Plus, Brain, Sparkles } from 'lucide-react'
 import { useData } from '../context/DataContext'
 import LYzrLogo from './LYzrLogo'
 
@@ -33,11 +33,25 @@ const Header = ({ sidebarOpen, setSidebarOpen, activeModule, modules, onUploadCl
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
           
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <LYzrLogo className="w-5 h-5 text-white" />
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                className="w-12 h-12 bg-gradient-to-br from-purple-500 via-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg"
+              >
+                <Brain size={24} className="text-white" />
+              </motion.div>
+              <div className="flex flex-col">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  Agentic Graph RAG
+                </h1>
+                <div className="flex items-center space-x-1">
+                  <Sparkles size={12} className="text-yellow-400" />
+                  <p className="text-xs text-gray-300 font-medium">Powered by Lyzr.AI</p>
+                </div>
+              </div>
             </div>
-            <h1 className="text-xl font-bold text-white">Lyzr.AI</h1>
           </div>
           
           {activeModuleData && (
@@ -65,45 +79,44 @@ const Header = ({ sidebarOpen, setSidebarOpen, activeModule, modules, onUploadCl
                   })
                   window.location.reload()
                 }}
-                className="flex items-center space-x-2 px-3 py-2 bg-red-500/20 hover:bg-red-500/40 text-red-300 hover:text-white rounded-lg transition-all duration-200"
+                className="flex items-center space-x-2 px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-lg transition-all duration-200 border border-red-500/30"
               >
-                <X size={16} />
-                <span className="text-sm">Clear Files</span>
+                <X size={14} />
+                <span className="text-sm font-medium">Clear Files</span>
               </button>
             )}
             
-            <div className="system-status">
-              <div className="status-indicator">
-                <div className="status-dot status-online"></div>
-                <span>System Online</span>
-              </div>
+            {/* Backend Status */}
+            <div className="flex items-center space-x-2">
+              <div 
+                className={`w-2 h-2 rounded-full animate-pulse ${
+                  backendStatus === 'online' ? 'bg-green-400' : 
+                  backendStatus === 'offline' ? 'bg-red-400' : 'bg-yellow-400'
+                }`}
+              />
+              <span className={`text-sm font-medium ${
+                backendStatus === 'online' ? 'text-green-400' : 
+                backendStatus === 'offline' ? 'text-red-400' : 'text-yellow-400'
+              }`}>
+                {backendStatus === 'online' ? 'Online' : backendStatus === 'offline' ? 'Offline' : 'Connecting'}
+              </span>
             </div>
-          </div>
-        </div>
-        
-        <div className="header-right">
-          <motion.button
-            className="upload-button"
-            onClick={onUploadClick}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Upload size={18} />
-            <span>Upload Files</span>
-          </motion.button>
-          
-          <div className="status-indicator">
-            <div 
-              className="status-dot"
-              style={{ backgroundColor: getStatusColor() }}
-            />
-            <span className="status-text">
-              Backend {backendStatus}
-            </span>
-          </div>
-          
-          <div className="header-actions">
-            <Activity size={18} className="activity-icon" />
+            
+            {/* Upload Button */}
+            <motion.button
+              onClick={onUploadClick}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl font-medium"
+            >
+              <Upload size={16} />
+              <span>Upload</span>
+            </motion.button>
+            
+            {/* Activity Indicator */}
+            <div className="w-8 h-8 bg-gray-800/50 hover:bg-gray-700/50 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
+              <Activity size={16} className="text-gray-400 hover:text-white transition-colors" />
+            </div>
           </div>
         </div>
       </div>
@@ -114,11 +127,12 @@ const Header = ({ sidebarOpen, setSidebarOpen, activeModule, modules, onUploadCl
           top: 0;
           left: 0;
           right: 0;
-          height: 64px;
-          background: rgba(26, 26, 26, 0.95);
-          backdrop-filter: blur(10px);
-          border-bottom: 1px solid #374151;
+          height: 80px;
+          background: linear-gradient(135deg, rgba(88, 28, 135, 0.95) 0%, rgba(30, 58, 138, 0.95) 50%, rgba(67, 56, 202, 0.95) 100%);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(139, 92, 246, 0.3);
           z-index: 1000;
+          box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
         }
         
         .header-content {

@@ -21,7 +21,13 @@ import {
   TrendingUp,
   Gauge,
   Settings,
-  Maximize2
+  Maximize2,
+  Play,
+  Trash2,
+  Clock,
+  File,
+  Image,
+  Archive
 } from 'lucide-react'
 // import ProfessionalModuleWrapper from './ProfessionalModuleWrapper'
 // import ProcessingSteps from './ProcessingSteps'
@@ -452,91 +458,59 @@ const EnhancedDocumentUpload = ({
   }
 
   return (
-    <div className="h-full bg-gradient-to-br from-gray-50 to-white">
-      <div className="h-full flex flex-col">
-        {/* Premium Header */}
-        <div className="bg-white border-b border-gray-200 px-8 py-6 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <motion.button
-                onClick={onBack}
-                className="flex items-center space-x-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                whileHover={{ scale: 1.02 }}
-              >
-                <ArrowLeft size={18} className="text-gray-600" />
-                <span className="text-gray-700 font-medium">Back</span>
-              </motion.button>
-              
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                  <Upload size={20} className="text-white" />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-bold text-gray-900">Document Intelligence</h1>
-                  <p className="text-gray-500 text-sm">Transform documents into knowledge graphs</p>
-                </div>
-              </div>
-            </div>
+    <div className="module-content">
+      {/* Module Header */}
+      <div className="module-header">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center space-x-4">
+            <motion.button
+              onClick={onBack}
+              className="btn-secondary flex items-center space-x-2"
+              whileHover={{ scale: 1.02 }}
+            >
+              <ArrowLeft size={18} />
+              <span>Back</span>
+            </motion.button>
             
-            <div className="flex items-center space-x-8">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{files.length}</div>
-                <div className="text-gray-500 text-sm">Documents</div>
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                <Upload size={20} className="text-white" />
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-green-600">{files.filter(f => f.status === 'completed').length}</div>
-                <div className="text-gray-500 text-sm">Processed</div>
+              <div>
+                <h1 className="module-title">Document Intelligence</h1>
+                <p className="module-subtitle">Transform documents into knowledge graphs</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 p-8 overflow-auto">
-          {/* Premium Dashboard Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <motion.div 
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
-              whileHover={{ y: -2 }}
-            >
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <FileText size={16} className="text-blue-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900">Document Processing</h3>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">AI-powered document analysis and extraction</p>
-              <div className="text-2xl font-bold text-blue-600">{files.length}</div>
-            </motion.div>
-
-            <motion.div 
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
-              whileHover={{ y: -2 }}
-            >
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                  <CheckCircle size={16} className="text-green-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900">Completed</h3>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">Successfully processed documents</p>
-              <div className="text-2xl font-bold text-green-600">{files.filter(f => f.status === 'completed').length}</div>
-            </motion.div>
-
-            <motion.div 
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100"
-              whileHover={{ y: -2 }}
-            >
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                  <Brain size={16} className="text-purple-600" />
-                </div>
-                <h3 className="font-semibold text-gray-900">AI Accuracy</h3>
-              </div>
-              <p className="text-gray-600 text-sm mb-4">Knowledge extraction precision</p>
-              <div className="text-2xl font-bold text-purple-600">99.2%</div>
-            </motion.div>
+        {/* Stats Grid */}
+        <div className="stats-grid">
+          <div className="stat-premium">
+            <div className="flex items-center space-x-3 mb-2">
+              <FileText size={20} className="text-blue-400" />
+              <span className="label">Documents</span>
+            </div>
+            <div className="value">{files.length}</div>
           </div>
+
+          <div className="stat-premium">
+            <div className="flex items-center space-x-3 mb-2">
+              <CheckCircle size={20} className="text-green-400" />
+              <span className="label">Completed</span>
+            </div>
+            <div className="value">{files.filter(f => f.status === 'completed').length}</div>
+          </div>
+
+          <div className="stat-premium">
+            <div className="flex items-center space-x-3 mb-2">
+              <Brain size={20} className="text-purple-400" />
+              <span className="label">AI Accuracy</span>
+            </div>
+            <div className="value">99.2%</div>
+          </div>
+        </div>
+      </div>
         {/* Main Container */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -544,181 +518,42 @@ const EnhancedDocumentUpload = ({
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          {/* Header */}
-          <div className="mb-12">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="relative mb-8 bg-gradient-to-r from-slate-800 via-gray-800 to-slate-800 backdrop-blur-xl rounded-3xl p-10 border border-cyan-400/30 shadow-2xl"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 blur-2xl rounded-3xl" />
-              <Brain size={32} className="text-cyan-400 mx-auto mb-4 animate-pulse" />
-              <h1 className="relative text-7xl font-black text-white drop-shadow-2xl">
-                🚀 Document Intelligence Hub
-              </h1>
-            </motion.div>
-            
-            <motion.p 
-              className="text-2xl text-white font-light mb-8 max-w-4xl mx-auto leading-relaxed tracking-wide"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              Transform documents into intelligent knowledge graphs with cutting-edge AI analysis
-            </motion.p>
-            
-            <motion.div 
-              className="flex items-center justify-center space-x-8 mb-12 text-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <div className="flex items-center space-x-2 text-green-300">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span className="font-semibold">99.9% Accuracy</span>
-              </div>
-              <div className="flex items-center space-x-2 text-blue-300">
-                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-                <span className="font-semibold">Real-time Processing</span>
-              </div>
-              <div className="flex items-center space-x-2 text-purple-300">
-                <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-                <span className="font-semibold">Enterprise Security</span>
-              </div>
-            </motion.div>
-          </div>
 
-          {/* Features */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-            {[
-              { icon: '🤖', text: 'AI-Powered Extraction', desc: 'Advanced NLP & ML' },
-              { icon: '⚡', text: 'Real-time Processing', desc: 'Instant Results' },
-              { icon: '🧠', text: 'Knowledge Graphs', desc: 'Smart Connections' },
-              { icon: '🔍', text: 'Entity Recognition', desc: 'Precise Detection' }
-            ].map((feature, index) => (
-              <motion.div
-                key={feature.text}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all" />
-                <div className="relative bg-slate-800/90 backdrop-blur-sm border border-gray-600/60 rounded-2xl p-6 hover:border-cyan-400/60 hover:bg-slate-700/90 transition-all duration-300 shadow-xl">
-                  <div className="text-3xl mb-3">{feature.icon}</div>
-                  <h3 className="text-white font-semibold mb-1">{feature.text}</h3>
-                  <p className="text-gray-400 text-sm">{feature.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
 
-          {/* Enhanced Upload Area */}
+          {/* Upload Area - Premium Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8 }}
-            className={`relative border-2 border-dashed rounded-3xl p-16 transition-all duration-500 overflow-hidden group ${
-              isDragging 
-                ? 'border-cyan-400 bg-gradient-to-br from-cyan-400/30 via-blue-500/25 to-purple-600/30 shadow-2xl shadow-cyan-500/40 scale-105' 
-                : 'border-gray-500/60 bg-gradient-to-br from-slate-800/60 via-gray-800/50 to-slate-900/60 hover:border-cyan-400/80 hover:shadow-xl hover:shadow-cyan-500/20 backdrop-blur-sm'
-            }`}
-            role="button"
-            tabIndex={0}
-            onClick={() => fileInputRef.current?.click()}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                fileInputRef.current?.click()
-              }
-            }}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="premium-card large mb-8"
           >
-            {/* Enhanced background layers for better visibility */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 via-gray-800/30 to-slate-900/20" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.2),transparent_50%)]" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(168,85,247,0.15),transparent_50%)]" />
-            
-            {/* Floating particles */}
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-400 rounded-full animate-ping" />
-              <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-blue-400 rounded-full animate-pulse" />
-              <div className="absolute bottom-1/4 left-2/3 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce" />
-            </div>
-            
-            <div className="relative text-center">
-              {/* Enhanced upload icon */}
-              <motion.div 
-                animate={isDragging ? 
-                  { scale: 1.3, rotate: 10, y: -10 } : 
-                  { scale: 1, rotate: 0, y: 0 }
+            <div
+              className={`border-2 border-dashed rounded-2xl p-10 text-center transition-colors ${
+                isDragging ? 'border-blue-500' : 'border-[rgba(100,116,139,0.5)]'
+              }`}
+              role="button"
+              tabIndex={0}
+              onClick={() => fileInputRef.current?.click()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  fileInputRef.current?.click()
                 }
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="relative mb-8"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full blur-xl opacity-50" />
-                <div className="relative text-8xl filter drop-shadow-2xl">
-                  {isDragging ? '🌟' : '📁'}
-                </div>
-              </motion.div>
-              
-              {/* Enhanced title */}
-              <motion.h3 
-                className="text-4xl font-bold mb-4 text-white drop-shadow-2xl"
-                animate={isDragging ? { scale: 1.1, y: -5 } : { scale: 1, y: 0 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              >
-                {isDragging ? '✨ Release to Upload Magic!' : '🚀 Drag & Drop Your Documents'}
-              </motion.h3>
-              
-              <motion.p 
-                className="text-gray-200 mb-8 text-xl font-medium"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2 }}
-              >
-                Transform your documents into intelligent knowledge graphs
-              </motion.p>
-              
-              {/* Enhanced format badges */}
-              <div className="flex flex-wrap justify-center gap-3 mb-10">
-                {[
-                  { format: 'PDF', color: 'from-red-500 to-red-600', icon: '📄' },
-                  { format: 'DOCX', color: 'from-blue-500 to-blue-600', icon: '📝' },
-                  { format: 'TXT', color: 'from-green-500 to-green-600', icon: '📃' },
-                  { format: 'MD', color: 'from-purple-500 to-purple-600', icon: '📋' }
-                ].map((item, index) => (
-                  <motion.span 
-                    key={item.format}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.4 + index * 0.1 }}
-                    className={`px-4 py-2 bg-gradient-to-r ${item.color} text-white rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2`}
-                  >
-                    <span>{item.icon}</span>
-                    <span>{item.format}</span>
-                  </motion.span>
-                ))}
+              }}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              <div className="mx-auto mb-4 w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(59,130,246,0.12)', border: '1px solid rgba(59,130,246,0.25)' }}>
+                <Upload className="w-6 h-6" />
               </div>
+              <h3 className="section-title mb-1">Drag & drop files here</h3>
+              <p className="text-muted mb-6">or click to browse supported formats (PDF, DOCX, TXT, MD)</p>
 
-              {/* Enhanced upload button */}
-              <motion.label
-                htmlFor="file-upload"
-                whileHover={{ scale: 1.08, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative inline-block group cursor-pointer"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition-all duration-300 animate-pulse" />
-                <div className="relative px-10 py-5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 hover:from-cyan-400 hover:via-blue-400 hover:to-purple-500 text-white font-bold rounded-2xl transition-all duration-300 flex items-center space-x-3 shadow-2xl">
-                  <Upload className="w-6 h-6" />
-                  <span className="text-lg">Choose Files to Upload</span>
-                  <div className="w-2 h-2 bg-white rounded-full animate-bounce" />
-                </div>
-              </motion.label>
-              
+              <label htmlFor="file-upload">
+                <button type="button" className="btn-primary">Choose Files</button>
+              </label>
+
               <input
                 id="file-upload"
                 ref={fileInputRef}
@@ -728,119 +563,35 @@ const EnhancedDocumentUpload = ({
                 onChange={handleFileInputChange}
                 className="hidden"
               />
-
-              {/* Enhanced info section */}
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm">
-                <motion.div 
-                  className="flex items-center space-x-3 text-gray-300 bg-green-500/10 px-4 py-2 rounded-full border border-green-500/20"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50" />
-                  <span className="font-medium">Max 10MB per file</span>
-                </motion.div>
-                <motion.div 
-                  className="flex items-center space-x-3 text-gray-300 bg-blue-500/10 px-4 py-2 rounded-full border border-blue-500/20"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="w-3 h-3 bg-blue-400 rounded-full animate-pulse shadow-lg shadow-blue-400/50" />
-                  <span className="font-medium">AI-Powered Processing</span>
-                </motion.div>
-                <motion.div 
-                  className="flex items-center space-x-3 text-gray-300 bg-purple-500/10 px-4 py-2 rounded-full border border-purple-500/20"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse shadow-lg shadow-purple-400/50" />
-                  <span className="font-medium">Secure & Private</span>
-                </motion.div>
-              </div>
             </div>
           </motion.div>
 
-      {/* Processing Complete - Ready Button */}
-          {files.some(f => f.status === 'completed') && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="mt-8 bg-gradient-to-r from-green-800/40 via-blue-800/40 to-purple-800/40 border-2 border-green-400/60 rounded-3xl p-10 text-center backdrop-blur-sm shadow-2xl"
-            >
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="text-6xl mb-4"
-              >
-                ✅
-              </motion.div>
-              <h3 className="text-4xl font-bold text-white mb-4 drop-shadow-xl">
-                Document Processing Complete!
-              </h3>
-              <p className="text-gray-100 mb-8 text-xl font-medium">
-                Your document has been successfully analyzed and is ready for the next step
-              </p>
-              
-              {/* Extract Preview */}
-              {files.filter(f => f.status === 'completed').map(file => (
-                <div key={file.id} className="mb-6 bg-gray-800/50 rounded-xl p-6 text-left">
-                  <h4 className="text-2xl font-bold text-white mb-6 flex items-center">
-                    <Brain className="w-8 h-8 mr-3 text-cyan-400 animate-pulse" />
-                    AI Document Intelligence Analysis
-                  </h4>
-                  
-                  {/* AI Metrics */}
-                  <div className="grid grid-cols-4 gap-4 mb-6">
-                    <div className="bg-blue-900/50 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-white">156</div>
-                      <div className="text-blue-300 text-sm">Entities</div>
-                    </div>
-                    <div className="bg-purple-900/50 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-white">89</div>
-                      <div className="text-purple-300 text-sm">Relations</div>
-                    </div>
-                    <div className="bg-green-900/50 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-white">94.7%</div>
-                      <div className="text-green-300 text-sm">Confidence</div>
-                    </div>
-                    <div className="bg-orange-900/50 rounded-xl p-4 text-center">
-                      <div className="text-2xl font-bold text-white">A+</div>
-                      <div className="text-orange-300 text-sm">Quality</div>
-                    </div>
-                  </div>
-                  
-                  <h5 className="text-lg font-semibold text-cyan-400 mb-3 flex items-center">
-                    <FileText className="w-5 h-5 mr-2" />
-                    Extracted Text Preview
-                  </h5>
-                  <div className="bg-slate-900/80 rounded-xl p-6 max-h-48 overflow-y-auto border border-gray-600/40">
-                    <p className="text-gray-200 text-sm font-mono leading-relaxed">
-                      {file.response?.data?.text?.substring(0, 500) || 'Text data extracted successfully...'}
-                      {(file.response?.data?.text?.length > 500) && '...'}
-                    </p>
-                  </div>
-                  <div className="mt-3 grid grid-cols-3 gap-3 text-sm">
-                    <div className="bg-blue-900/30 rounded-lg p-2 text-center">
-                      <span className="text-blue-400 font-bold">
-                        {file.response?.data?.character_count || 'N/A'}
-                      </span>
-                      <div className="text-gray-400 text-xs">Characters</div>
-                    </div>
-                    <div className="bg-purple-900/30 rounded-lg p-2 text-center">
-                      <span className="text-purple-400 font-bold">
-                        {file.response?.data?.word_count || 'N/A'}
-                      </span>
-                      <div className="text-gray-400 text-xs">Words</div>
-                    </div>
-                    <div className="bg-green-900/30 rounded-lg p-2 text-center">
-                      <span className="text-green-400 font-bold">
-                        {file.response?.data?.page_count || '1'}
-                      </span>
-                      <div className="text-gray-400 text-xs">Pages</div>
-                    </div>
-                  </div>
+      {/* Processing Complete */}
+      {files.some(f => f.status === 'completed') && (
+        <div className="premium-card mb-6">
+          <div className="text-center">
+              <CheckCircle size={40} className="mx-auto" />
+              <h3 className="section-title mt-3">Processing complete</h3>
+              <p className="text-muted mb-6">All uploaded files were processed successfully. You can continue to Ontology Generation.</p>
+
+              <div className="stats-grid mb-6">
+                <div className="stat-premium">
+                  <div className="label">Files</div>
+                  <div className="value">{files.filter(f => f.status === 'completed').length}</div>
                 </div>
-              ))}
-              
-              <motion.button
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.95 }}
+                <div className="stat-premium">
+                  <div className="label">Status</div>
+                  <div className="value">Ready</div>
+                </div>
+                <div className="stat-premium">
+                  <div className="label">Confidence</div>
+                  <div className="value">94.7%</div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="btn-primary"
                 onClick={() => {
                   const completedFile = files.find(f => f.status === 'completed')
                   if (completedFile && onUploadComplete) {
@@ -851,70 +602,61 @@ const EnhancedDocumentUpload = ({
                     })
                   }
                 }}
-                className="relative inline-block group cursor-pointer"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500 via-blue-500 to-purple-600 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition-all duration-300 animate-pulse" />
-                <div className="relative px-12 py-5 bg-gradient-to-r from-green-500 via-blue-500 to-purple-600 hover:from-green-400 hover:via-blue-400 hover:to-purple-500 text-white font-bold rounded-2xl transition-all duration-300 flex items-center space-x-3 shadow-2xl text-xl">
-                  <CheckCircle className="w-6 h-6" />
-                  <span>Ready - Continue to Ontology Generation</span>
-                  <Brain className="w-6 h-6" />
-                </div>
-              </motion.button>
-            </motion.div>
+                Continue
+              </button>
+            </div>
+          </div>
           )}
 
           {/* Upload Summary */}
           {files.length > 0 && (
             <>
-              <div className="mt-8 grid grid-cols-2 md:grid-cols-5 gap-3">
-                {[
-                  { label: 'Ready', count: files.filter(f => f.status === 'ready').length, color: 'text-blue-400 bg-blue-500/10 border-blue-500/20' },
-                  { label: 'Uploading', count: files.filter(f => f.status === 'uploading').length, color: 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20' },
-                  { label: 'Processing', count: files.filter(f => f.status === 'processing').length, color: 'text-purple-400 bg-purple-500/10 border-purple-500/20' },
-                  { label: 'Completed', count: files.filter(f => f.status === 'completed').length, color: 'text-green-400 bg-green-500/10 border-green-500/20' },
-                  { label: 'Error', count: files.filter(f => f.status === 'error').length, color: 'text-red-400 bg-red-500/10 border-red-500/20' }
-                ].map((item) => (
-                  <div key={item.label} className={`border ${item.color} rounded-xl p-3 text-center`}>
-                    <div className="text-2xl font-bold">{item.count}</div>
-                    <div className="text-xs opacity-80">{item.label}</div>
-                  </div>
-                ))}
+              <div className="premium-card mb-6">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  {[
+                    { label: 'Ready', count: files.filter(f => f.status === 'ready').length, color: 'text-blue-400' },
+                    { label: 'Uploading', count: files.filter(f => f.status === 'uploading').length, color: 'text-yellow-400' },
+                    { label: 'Processing', count: files.filter(f => f.status === 'processing').length, color: 'text-purple-400' },
+                    { label: 'Completed', count: files.filter(f => f.status === 'completed').length, color: 'text-green-400' },
+                    { label: 'Error', count: files.filter(f => f.status === 'error').length, color: 'text-red-400' }
+                  ].map((item) => (
+                    <div key={item.label} className="stat-premium text-center">
+                      <div className={`value ${item.color}`}>{item.count}</div>
+                      <div className="label">{item.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* File List */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-6 space-y-4"
-              >
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-semibold text-white">
-                  Files ({files.length})
-                </h3>
-                <div className="flex space-x-4">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={uploadAll}
-                    disabled={!files.some(f => f.status === 'ready')}
-                    className="px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white rounded-lg font-medium flex items-center space-x-2 transition-all duration-300"
-                  >
-                    <Play className="w-4 h-4" />
-                    <span>Process All</span>
-                  </motion.button>
-                  
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={clearCompleted}
-                    disabled={!files.some(f => f.status === 'completed')}
-                    className="px-6 py-2 bg-gray-600 hover:bg-gray-500 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-medium flex items-center space-x-2 transition-all duration-300"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                    <span>Clear</span>
-                  </motion.button>
+              <div className="premium-card">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="section-title">
+                    Files ({files.length})
+                  </h3>
+                  <div className="flex space-x-3">
+                    <button
+                      onClick={uploadAll}
+                      disabled={!files.some(f => f.status === 'ready')}
+                      className="btn-primary"
+                    >
+                      <RefreshCw size={16} />
+                      Process All
+                    </button>
+                    
+                    <button
+                      onClick={clearCompleted}
+                      disabled={!files.some(f => f.status === 'completed')}
+                      className="btn-secondary"
+                    >
+                      <X size={16} />
+                      Clear
+                    </button>
+                  </div>
                 </div>
-              </div>
+
+                <div className="space-y-4">
 
               <AnimatePresence>
                 {files.map(fileItem => {
@@ -927,7 +669,7 @@ const EnhancedDocumentUpload = ({
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
-                      className="bg-slate-800/90 border border-gray-600/60 rounded-xl p-6 backdrop-blur-sm shadow-xl hover:bg-slate-700/90 transition-all duration-300"
+                      className="premium-card muted p-6"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
@@ -939,9 +681,13 @@ const EnhancedDocumentUpload = ({
                         </div>
                         
                         <div className="flex items-center space-x-3">
-                          <StatusIcon className={`w-5 h-5 ${getStatusColor(fileItem.status)} ${
-                            fileItem.status === 'uploading' || fileItem.status === 'processing' ? 'animate-spin' : ''
-                          }`} />
+                          <span className={`status-chip ${
+                            fileItem.status === 'completed' ? 'success' :
+                            fileItem.status === 'error' ? 'error' :
+                            (fileItem.status === 'uploading' || fileItem.status === 'processing') ? 'warning' : 'neutral'
+                          }`}>
+                            {fileItem.status === 'uploading' ? 'Uploading' : fileItem.status.charAt(0).toUpperCase() + fileItem.status.slice(1)}
+                          </span>
                           <button
                             onClick={() => removeFile(fileItem.id)}
                             className="p-1 hover:bg-red-500/20 rounded text-gray-400 hover:text-red-400 transition-colors"
@@ -960,11 +706,9 @@ const EnhancedDocumentUpload = ({
                             </span>
                             <span className="text-cyan-400 font-bold">{fileItem.progress}%</span>
                           </div>
-                          <div className="w-full bg-gray-700 rounded-full h-2">
+                          <div className="progress-bar">
                             <motion.div
-                              className={`h-2 rounded-full ${
-                                fileItem.status === 'uploading' ? 'bg-teal-500' : 'bg-blue-500'
-                              }`}
+                              className="progress-fill"
                               initial={{ width: 0 }}
                               animate={{ width: `${fileItem.progress}%` }}
                               transition={{ duration: 0.3 }}
@@ -1031,97 +775,21 @@ const EnhancedDocumentUpload = ({
                   )
                 })}
               </AnimatePresence>
-            </motion.div>
+                </div>
+              </div>
             </>
           )}
 
-          {/* Step 1 Completion Section */}
-          {isProcessingComplete && showReadyButton && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mt-8 bg-gradient-to-r from-green-900/30 to-blue-900/30 border border-green-500/30 rounded-2xl p-8"
-            >
-              <div className="text-center mb-6">
-                <CheckCircle size={64} className="mx-auto text-green-400 mb-4" />
-                <h2 className="text-3xl font-bold text-white mb-2">Step 1 Complete!</h2>
-                <p className="text-gray-300 text-lg">Document processing and text extraction successful</p>
-              </div>
+        </motion.div>
 
-              {/* Extracted Text Preview */}
-              {extractedText && (
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-white mb-4 flex items-center">
-                    <Eye className="mr-2" size={20} />
-                    Extracted Text Preview
-                  </h3>
-                  <div className="bg-gray-900/50 border border-gray-600 rounded-xl p-6 max-h-80 overflow-y-auto">
-                    <pre className="text-gray-300 text-sm whitespace-pre-wrap font-mono leading-relaxed">
-                      {extractedText}
-                    </pre>
-                  </div>
-                </div>
-              )}
-
-              {/* Progress Indicator */}
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-white font-medium">Pipeline Progress</span>
-                  <span className="text-green-400 font-bold">Step {currentStep} of {totalSteps}</span>
-                </div>
-                <div className="w-full bg-gray-700 rounded-full h-3">
-                  <motion.div
-                    className="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${(currentStep / totalSteps) * 100}%` }}
-                    transition={{ duration: 1, delay: 0.5 }}
-                  />
-                </div>
-              </div>
-
-              {/* Ready Button */}
-              <div className="text-center">
-                <motion.button
-                  onClick={() => {
-                    onNotification?.({
-                      type: 'info',
-                      title: 'Proceeding to Step 2',
-                      message: 'Moving to Ontology Generator...'
-                    })
-                    // Navigate to next step - this would typically change the active module
-                    if (onUploadComplete) {
-                      onUploadComplete({ 
-                        step: 1, 
-                        completed: true, 
-                        extractedText,
-                        nextStep: 'ontology'
-                      })
-                    }
-                  }}
-                  className="bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center mx-auto"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Brain className="mr-3" size={24} />
-                  Ready - Proceed to Ontology Generator
-                  <Sparkles className="ml-3" size={20} />
-                </motion.button>
-                <p className="text-gray-400 text-sm mt-4">
-                  Click to continue to Step 2: NLP-based entity extraction and relationship detection
-                </p>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Backend Status */}
+      {/* Backend Status */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
             className="mt-12"
           >
-            <div className="bg-slate-800/80 backdrop-blur-sm border border-gray-600/60 rounded-2xl p-8 shadow-xl">
+            <div className="premium-card">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center space-x-2">
@@ -1145,15 +813,13 @@ const EnhancedDocumentUpload = ({
                   </div>
                 </div>
                 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <button
+                  type="button"
                   onClick={checkBackendHealth}
-                  className="px-4 py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-lg border border-blue-500/30 transition-colors flex items-center space-x-2"
+                  className="btn-secondary"
                 >
-                  <RefreshCw className={`w-4 h-4 ${backendStatus === 'checking' ? 'animate-spin' : ''}`} />
-                  <span>Refresh</span>
-                </motion.button>
+                  Refresh
+                </button>
               </div>
               
               {backendStatus === 'offline' && (
@@ -1175,9 +841,6 @@ const EnhancedDocumentUpload = ({
               )}
             </div>
           </motion.div>
-        </motion.div>
-        </div>
-      </div>
     </div>
   )
 }

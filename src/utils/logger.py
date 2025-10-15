@@ -64,3 +64,15 @@ def get_logger(name: str) -> structlog.stdlib.BoundLogger:
 
 # Default logger for the application
 logger = setup_logger("agentic_graph_rag")
+
+def setup_logging(level: str = "INFO") -> structlog.stdlib.BoundLogger:
+    """
+    Setup logging function expected by main.py
+    
+    Args:
+        level: Logging level
+    
+    Returns:
+        Configured logger
+    """
+    return setup_logger("agentic_graph_rag", level)

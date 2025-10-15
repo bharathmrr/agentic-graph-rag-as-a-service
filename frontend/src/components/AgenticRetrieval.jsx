@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Zap, Search, Network, Filter, Brain, Eye, Download, CheckCircle, Target, Layers } from 'lucide-react'
+import { Zap, Search, Network, Filter, Brain, Eye, Download, CheckCircle, Target, Layers, ArrowLeft } from 'lucide-react'
 
-const AgenticRetrieval = ({ onNotification, onRetrievalComplete }) => {
+const AgenticRetrieval = ({ onNotification, onRetrievalComplete, onBack }) => {
   // Step 8 specific states
   const [currentStep, setCurrentStep] = useState(8)
   const [totalSteps] = useState(12)
@@ -242,81 +242,85 @@ const AgenticRetrieval = ({ onNotification, onRetrievalComplete }) => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-white flex items-center">
-            <Zap className="w-6 h-6 mr-2 text-yellow-400" />
-            Agentic Retrieval
-          </h2>
-          <p className="text-gray-400 mt-1">Intelligent multi-strategy information retrieval</p>
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      {/* Header */}
+      <div className="premium-card mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={onBack}
+              className="btn-secondary"
+            >
+              <ArrowLeft size={18} />
+              <span>Back</span>
+            </button>
+            
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center">
+                <Zap size={20} className="text-white" />
+              </div>
+              <div>
+                <h1 className="section-title">Agentic Retrieval</h1>
+                <p className="text-muted">Intelligent multi-strategy information retrieval</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Search Interface */}
-      <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
+      <div className="premium-card mb-6">
         <div className="space-y-4">
           {/* Strategy Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Retrieval Strategy</label>
-            <div className="flex flex-wrap gap-2">
+            <h3 className="section-subtitle mb-3">Retrieval Strategy</h3>
+            <div className="segmented">
               {strategies.map((strat) => {
                 const Icon = strat.icon
                 return (
-                  <motion.button
+                  <button
                     key={strat.id}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
                     onClick={() => setStrategy(strat.id)}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium flex items-center space-x-2 ${
-                      strategy === strat.id
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
+                    className={`segmented-item ${strategy === strat.id ? 'active' : ''}`}
                   >
-                    <Icon className={`w-4 h-4 ${strategy === strat.id ? 'text-white' : strat.color}`} />
+                    <Icon size={16} />
                     <span>{strat.name}</span>
-                  </motion.button>
+                  </button>
                 )
               })}
             </div>
           </div>
 
           {/* Query Input */}
-          <div className="flex space-x-4">
-            <div className="flex-1">
+          <div>
+            <h3 className="section-subtitle mb-3">Search Query</h3>
+            <div className="flex space-x-3">
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Enter your query for intelligent retrieval..."
-                className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500"
+                className="flex-1 px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500"
                 onKeyPress={(e) => e.key === 'Enter' && performSearch()}
               />
+              <button
+                onClick={performSearch}
+                disabled={!query.trim() || isSearching}
+                className="btn-primary"
+              >
+                <Zap size={16} />
+                <span>{isSearching ? 'Searching...' : 'Search'}</span>
+              </button>
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={performSearch}
-              disabled={!query.trim() || isSearching}
-              className="px-6 py-3 bg-yellow-600 hover:bg-yellow-700 disabled:bg-gray-600 text-white rounded-lg flex items-center space-x-2"
-            >
-              <Zap className="w-4 h-4" />
-              <span>{isSearching ? 'Searching...' : 'Search'}</span>
-            </motion.button>
           </div>
         </div>
       </div>
 
       {/* Reasoning Steps */}
       {reasoningSteps.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-800/50 border border-gray-700 rounded-xl p-6"
-        >
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-            <Brain className="w-5 h-5 mr-2" />
+        <div className="premium-card mb-6">
+          <h3 className="section-title mb-4">
+            <Brain className="w-5 h-5 mr-2 inline" />
             Reasoning Chain
           </h3>
           
@@ -346,35 +350,23 @@ const AgenticRetrieval = ({ onNotification, onRetrievalComplete }) => {
               )
             })}
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* Search Results */}
       {results.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-800/50 border border-gray-700 rounded-xl p-6"
-        >
+        <div className="premium-card">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-white">Search Results ({results.length})</h3>
+            <h3 className="section-title">Search Results ({results.length})</h3>
             <div className="flex space-x-2">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded flex items-center space-x-1"
-              >
-                <Eye className="w-4 h-4" />
+              <button className="btn-secondary">
+                <Eye size={16} />
                 <span>View All</span>
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded flex items-center space-x-1"
-              >
-                <Download className="w-4 h-4" />
+              </button>
+              <button className="btn-secondary">
+                <Download size={16} />
                 <span>Export</span>
-              </motion.button>
+              </button>
             </div>
           </div>
           
@@ -407,26 +399,16 @@ const AgenticRetrieval = ({ onNotification, onRetrievalComplete }) => {
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
       )}
 
       {/* Loading State */}
       {isSearching && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="bg-gray-800/50 border border-gray-700 rounded-xl p-8 text-center"
-        >
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-8 h-8 border-2 border-yellow-500 border-t-transparent rounded-full"
-            />
-            <span className="text-white text-lg">Performing intelligent retrieval...</span>
-          </div>
-          <p className="text-gray-400">Analyzing query and selecting optimal strategy</p>
-        </motion.div>
+        <div className="premium-card text-center">
+          <div className="loading-spinner mx-auto mb-4"></div>
+          <h4 className="section-subtitle">Performing Intelligent Retrieval</h4>
+          <p className="text-muted">Analyzing query and selecting optimal strategy</p>
+        </div>
       )}
     </div>
   )

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Network, Play, Download, Eye, Settings, BarChart3, Database, Layers, CheckCircle, Zap } from 'lucide-react'
+import { Network, Play, Download, Eye, Settings, BarChart3, Database, Layers, CheckCircle, Zap, ArrowLeft } from 'lucide-react'
+import { useData } from '../context/DataContext'
 
-const GraphConstructor = ({ onNotification, onGraphComplete }) => {
+const GraphConstructor = ({ onNotification, onGraphComplete, onBack }) => {
+  const { hasDocuments, ontologyData, entityData, backendStatus } = useData()
   // Step 5 specific states
   const [currentStep, setCurrentStep] = useState(5)
   const [totalSteps] = useState(12)
@@ -17,33 +19,18 @@ const GraphConstructor = ({ onNotification, onGraphComplete }) => {
   const [multipleGraphs, setMultipleGraphs] = useState([])
   const [activeGraphId, setActiveGraphId] = useState(null)
 
-  const mockGraphData = {
-    nodes: [
-      { id: 'n1', label: 'Alice Johnson', type: 'PERSON', size: 20, color: '#FF6B6B' },
-      { id: 'n2', label: 'TechCorp Inc', type: 'ORGANIZATION', size: 25, color: '#4ECDC4' },
-      { id: 'n3', label: 'San Francisco', type: 'LOCATION', size: 18, color: '#45B7D1' },
-      { id: 'n4', label: 'Machine Learning', type: 'CONCEPT', size: 22, color: '#96CEB4' },
-      { id: 'n5', label: 'Bob Smith', type: 'PERSON', size: 17, color: '#FF6B6B' },
-      { id: 'n6', label: 'Data Science', type: 'CONCEPT', size: 21, color: '#96CEB4' }
-    ],
-    edges: [
-      { id: 'e1', source: 'n1', target: 'n2', type: 'WORKS_FOR', weight: 0.9 },
-      { id: 'e2', source: 'n2', target: 'n3', type: 'LOCATED_IN', weight: 0.8 },
-      { id: 'e3', source: 'n1', target: 'n4', type: 'EXPERT_IN', weight: 0.7 },
-      { id: 'e4', source: 'n4', target: 'n6', type: 'RELATED_TO', weight: 0.6 },
-      { id: 'e5', source: 'n5', target: 'n2', type: 'WORKS_FOR', weight: 0.8 },
-      { id: 'e6', source: 'n5', target: 'n6', type: 'EXPERT_IN', weight: 0.9 }
-    ],
-    statistics: {
-      totalNodes: 6,
-      totalEdges: 6,
-      density: 0.33,
-      avgDegree: 2.0,
-      clusters: 2
-    }
-  }
+  // Remove mock data - only use real document-based data
 
   const buildGraph = async () => {
+    if (!hasDocuments || !ontologyData) {
+      onNotification?.({
+        type: 'warning',
+        title: 'No Data Available',
+        message: 'Please upload documents and generate ontology first'
+      })
+      return
+    }
+
     setIsBuilding(true)
     setNeo4jIntegration(true)
     
@@ -51,97 +38,44 @@ const GraphConstructor = ({ onNotification, onGraphComplete }) => {
       setProcessingStage('🚀 Connecting to Neo4j database...')
       setBuildProgress(10)
       
-      await new Promise(resolve => setTimeout(resolve, 800))
-      setProcessingStage('📊 Processing ontology and embeddings...')
-      setBuildProgress(25)
-      
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      setProcessingStage('🏗️ Building graph structure with relationships...')
-      setBuildProgress(50)
-      
-      await new Promise(resolve => setTimeout(resolve, 1200))
-      setProcessingStage('🎯 Creating dynamic node network...')
-      setBuildProgress(75)
-      
-      await new Promise(resolve => setTimeout(resolve, 800))
-      setProcessingStage('✨ Optimizing graph visualization...')
-      setBuildProgress(90)
-      
-      // Generate dynamic graph based on selected nodes
-      const mockGraphs = [
-        {
-          id: 'graph_5_nodes',
-          name: '5-Node Network',
-          nodeCount: 5,
-          nodes: [
-            { id: 'bharath', label: 'Bharath', type: 'PERSON', size: 25, color: '#FF6B6B' },
-            { id: 'lyzr', label: 'LYzr AI', type: 'ORGANIZATION', size: 30, color: '#4ECDC4' },
-            { id: 'project', label: 'Agentic Graph RAG', type: 'PROJECT', size: 28, color: '#45B7D1' },
-            { id: 'neo4j', label: 'Neo4j', type: 'TECHNOLOGY', size: 22, color: '#96CEB4' },
-            { id: 'chromadb', label: 'ChromaDB', type: 'TECHNOLOGY', size: 20, color: '#FECA57' }
-          ],
-          edges: [
-            { id: 'e1', source: 'bharath', target: 'project', type: 'CREATED', weight: 0.95 },
-            { id: 'e2', source: 'bharath', target: 'lyzr', type: 'WORKS_AT', weight: 0.92 },
-            { id: 'e3', source: 'project', target: 'neo4j', type: 'USES', weight: 0.89 },
-            { id: 'e4', source: 'project', target: 'chromadb', type: 'INTEGRATES', weight: 0.87 },
-            { id: 'e5', source: 'lyzr', target: 'project', type: 'DEVELOPS', weight: 0.91 }
-          ]
-        },
-        {
-          id: 'graph_8_nodes',
-          name: '8-Node Extended Network',
-          nodeCount: 8,
-          nodes: [
-            { id: 'bharath', label: 'Bharath', type: 'PERSON', size: 25, color: '#FF6B6B' },
-            { id: 'lyzr', label: 'LYzr AI', type: 'ORGANIZATION', size: 30, color: '#4ECDC4' },
-            { id: 'project', label: 'Agentic Graph RAG', type: 'PROJECT', size: 28, color: '#45B7D1' },
-            { id: 'neo4j', label: 'Neo4j', type: 'TECHNOLOGY', size: 22, color: '#96CEB4' },
-            { id: 'chromadb', label: 'ChromaDB', type: 'TECHNOLOGY', size: 20, color: '#FECA57' },
-            { id: 'openai', label: 'OpenAI', type: 'ORGANIZATION', size: 24, color: '#4ECDC4' },
-            { id: 'ml', label: 'Machine Learning', type: 'CONCEPT', size: 26, color: '#A8E6CF' },
-            { id: 'kg', label: 'Knowledge Graph', type: 'CONCEPT', size: 27, color: '#A8E6CF' }
-          ],
-          edges: [
-            { id: 'e1', source: 'bharath', target: 'project', type: 'CREATED', weight: 0.95 },
-            { id: 'e2', source: 'bharath', target: 'lyzr', type: 'WORKS_AT', weight: 0.92 },
-            { id: 'e3', source: 'project', target: 'neo4j', type: 'USES', weight: 0.89 },
-            { id: 'e4', source: 'project', target: 'chromadb', type: 'INTEGRATES', weight: 0.87 },
-            { id: 'e5', source: 'lyzr', target: 'project', type: 'DEVELOPS', weight: 0.91 },
-            { id: 'e6', source: 'project', target: 'openai', type: 'POWERED_BY', weight: 0.85 },
-            { id: 'e7', source: 'kg', target: 'ml', type: 'IMPLEMENTS', weight: 0.83 },
-            { id: 'e8', source: 'project', target: 'kg', type: 'CREATES', weight: 0.94 }
-          ]
-        }
-      ]
-      
-      setMultipleGraphs(mockGraphs)
-      setGraphData(mockGraphs[0]) // Default to 5-node graph
-      setActiveGraphId('graph_5_nodes')
-      
-      setProcessingStage('✅ Graph construction complete!')
-      setBuildProgress(100)
-      
-      // Complete Step 5
-      setIsStep5Complete(true)
-      setShowReadyButton(true)
-      
-      onNotification?.({
-        type: 'success',
-        title: 'Step 5 Complete!',
-        message: `Built interactive knowledge graph with ${mockGraphs.length} different configurations. Neo4j integration successful.`
+      // Call real backend API
+      const response = await fetch('http://localhost:8000/graph/build-from-ontology', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          entities: ontologyData.entities,
+          relationships: ontologyData.relationships
+        })
       })
       
-      // Trigger completion callback
-      if (onGraphComplete) {
-        onGraphComplete({
-          step: 5,
-          graphs: mockGraphs,
-          activeGraph: mockGraphs[0],
-          neo4jIntegrated: true,
-          completed: true
+      setBuildProgress(50)
+      setProcessingStage('🏗️ Building graph structure...')
+      
+      if (!response.ok) {
+        throw new Error('Failed to build graph')
+      }
+      
+      const result = await response.json()
+      setBuildProgress(90)
+      setProcessingStage('✨ Finalizing visualization...')
+      
+      // Use real graph data from backend
+      if (result.success) {
+        setGraphData(result.graph_data)
+        onNotification?.({
+          type: 'success',
+          title: 'Graph Built Successfully',
+          message: `Created graph with ${result.graph_data.nodes?.length || 0} nodes and ${result.graph_data.edges?.length || 0} relationships`
         })
       }
+      
+      setBuildProgress(100)
+      setProcessingStage('✅ Graph construction complete!')
+      
+      if (onGraphComplete) {
+        onGraphComplete(result.graph_data)
+      }
+      
       
     } catch (error) {
       onNotification?.({
@@ -178,109 +112,118 @@ const GraphConstructor = ({ onNotification, onGraphComplete }) => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-white flex items-center">
-            <Network className="w-6 h-6 mr-2 text-pink-400" />
-            Graph Constructor
-          </h2>
-          <p className="text-gray-400 mt-1">Build interactive Neo4j knowledge graphs</p>
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      {/* Header */}
+      <div className="premium-card mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={onBack}
+              className="btn-secondary"
+            >
+              <ArrowLeft size={18} />
+              <span>Back</span>
+            </button>
+            
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
+                <Network size={20} className="text-white" />
+              </div>
+              <div>
+                <h1 className="section-title">Graph Constructor</h1>
+                <p className="text-muted">Build knowledge graphs with Neo4j visualization</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className="premium-card mb-6">
+        <div className="flex items-center justify-between">
+          <h3 className="section-title">Controls</h3>
+          <button
+            onClick={buildGraph}
+            disabled={isBuilding}
+            className="btn-primary"
+          >
+            <Play size={16} />
+            <span>{isBuilding ? 'Building...' : 'Build Graph'}</span>
+          </button>
         </div>
         
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={buildGraph}
-          disabled={isBuilding}
-          className="px-4 py-2 bg-pink-600 hover:bg-pink-700 disabled:bg-gray-600 text-white rounded-lg flex items-center space-x-2"
-        >
-          <Play className="w-4 h-4" />
-          <span>{isBuilding ? 'Building...' : 'Build Knowledge Graph'}</span>
-        </motion.button>
+        {isBuilding && (
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm text-muted">{processingStage}</span>
+              <span className="text-sm text-pink-400">{buildProgress}%</span>
+            </div>
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: `${buildProgress}%` }}></div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Statistics */}
       {graphData && (
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-400 text-sm">Total Nodes</p>
-                <p className="text-2xl font-bold text-white">{graphData.statistics.totalNodes}</p>
-              </div>
-              <Network className="w-8 h-8 text-pink-400" />
+        <div className="stats-grid mb-6">
+          <div className="stat-premium">
+            <div className="stat-icon">
+              <Network size={16} />
             </div>
+            <div className="stat-label">Total Nodes</div>
+            <div className="stat-value">{graphData.statistics.totalNodes}</div>
           </div>
           
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-400 text-sm">Total Edges</p>
-                <p className="text-2xl font-bold text-pink-400">{graphData.statistics.totalEdges}</p>
-              </div>
-              <BarChart3 className="w-8 h-8 text-pink-400" />
+          <div className="stat-premium">
+            <div className="stat-icon">
+              <BarChart3 size={16} />
             </div>
+            <div className="stat-label">Total Edges</div>
+            <div className="stat-value">{graphData.statistics.totalEdges}</div>
           </div>
           
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-400 text-sm">Density</p>
-                <p className="text-2xl font-bold text-blue-400">{graphData.statistics.density}</p>
-              </div>
-              <Eye className="w-8 h-8 text-blue-400" />
+          <div className="stat-premium">
+            <div className="stat-icon">
+              <Eye size={16} />
             </div>
+            <div className="stat-label">Density</div>
+            <div className="stat-value">{graphData.statistics.density}</div>
           </div>
           
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-400 text-sm">Avg Degree</p>
-                <p className="text-2xl font-bold text-green-400">{graphData.statistics.avgDegree}</p>
-              </div>
-              <Settings className="w-8 h-8 text-green-400" />
+          <div className="stat-premium">
+            <div className="stat-icon">
+              <Settings size={16} />
             </div>
+            <div className="stat-label">Avg Degree</div>
+            <div className="stat-value">{graphData.statistics.avgDegree}</div>
           </div>
           
-          <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-400 text-sm">Clusters</p>
-                <p className="text-2xl font-bold text-purple-400">{graphData.statistics.clusters}</p>
-              </div>
-              <Network className="w-8 h-8 text-purple-400" />
+          <div className="stat-premium">
+            <div className="stat-icon">
+              <Layers size={16} />
             </div>
+            <div className="stat-label">Clusters</div>
+            <div className="stat-value">{graphData.statistics.clusters}</div>
           </div>
         </div>
       )}
 
-      {/* Graph Visualization Preview */}
+      {/* Graph Preview */}
       {graphData && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-800/50 border border-gray-700 rounded-xl p-6"
-        >
+        <div className="premium-card mb-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold text-white">Graph Preview</h3>
+            <h3 className="section-title">Graph Preview</h3>
             <div className="flex space-x-2">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded flex items-center space-x-1"
-              >
-                <Eye className="w-4 h-4" />
+              <button className="btn-secondary">
+                <Eye size={16} />
                 <span>View Full</span>
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-3 py-1 bg-green-600 hover:bg-green-700 text-white text-sm rounded flex items-center space-x-1"
-              >
-                <Download className="w-4 h-4" />
+              </button>
+              <button className="btn-secondary">
+                <Download size={16} />
                 <span>Export</span>
-              </motion.button>
+              </button>
             </div>
           </div>
           
@@ -334,37 +277,37 @@ const GraphConstructor = ({ onNotification, onGraphComplete }) => {
               </svg>
             </div>
           </div>
-        </motion.div>
+        </div>
       )}
 
-      {/* Node Types */}
+      {/* Node and Relationship Types */}
       {graphData && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Node Types</h3>
+        <div className="content-grid two-column">
+          <div className="premium-card">
+            <h3 className="section-title mb-4">Node Types</h3>
             <div className="space-y-3">
               {Object.entries(getTypeStats()).map(([type, count]) => (
                 <div key={type} className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div 
-                      className="w-4 h-4 rounded-full"
+                      className="w-3 h-3 rounded-full"
                       style={{ backgroundColor: graphData.nodes.find(n => n.type === type)?.color }}
                     />
-                    <span className="text-white">{type}</span>
+                    <span className="text-white font-medium">{type}</span>
                   </div>
-                  <span className="text-gray-400">{count} nodes</span>
+                  <span className="text-muted">{count} nodes</span>
                 </div>
               ))}
             </div>
           </div>
           
-          <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
-            <h3 className="text-lg font-semibold text-white mb-4">Relationship Types</h3>
+          <div className="premium-card">
+            <h3 className="section-title mb-4">Relationship Types</h3>
             <div className="space-y-3">
               {Object.entries(getRelationshipStats()).map(([type, count]) => (
                 <div key={type} className="flex items-center justify-between">
-                  <span className="text-white">{type}</span>
-                  <span className="text-gray-400">{count} edges</span>
+                  <span className="text-white font-medium">{type}</span>
+                  <span className="text-muted">{count} edges</span>
                 </div>
               ))}
             </div>
@@ -372,24 +315,17 @@ const GraphConstructor = ({ onNotification, onGraphComplete }) => {
         </div>
       )}
 
-      {/* Building State */}
-      {isBuilding && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="bg-gray-800/50 border border-gray-700 rounded-xl p-8 text-center"
-        >
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="w-8 h-8 border-2 border-pink-500 border-t-transparent rounded-full"
-            />
-            <span className="text-white text-lg">Building knowledge graph...</span>
-          </div>
-          <p className="text-gray-400">Constructing nodes and relationships</p>
-        </motion.div>
-      )}
+      {!graphData && !isBuilding ? (
+        <div className="empty-state">
+          <Network className="empty-state-icon" />
+          <h4 className="empty-state-title">Ready to Build Graph</h4>
+          <p className="empty-state-description">Click "Build Graph" to create an interactive Neo4j knowledge graph</p>
+          <button onClick={buildGraph} className="btn-primary">
+            <Play size={16} />
+            Build Knowledge Graph
+          </button>
+        </div>
+      ) : null}
     </div>
   )
 }

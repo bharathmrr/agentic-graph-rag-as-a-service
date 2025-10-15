@@ -26,7 +26,7 @@ import EnhancedDocumentUpload from './components/EnhancedDocumentUpload'
 import NewOntologyGenerator from './components/NewOntologyGenerator'
 import EnhancedEntityResolution from './components/EnhancedEntityResolution'
 import EnhancedEmbeddingGenerator from './components/EnhancedEmbeddingGenerator'
-import NewGraphConstructor from './components/NewGraphConstructor'
+import GraphConstructor from './components/GraphConstructor'
 import EnhancedKnowledgeGraph from './components/EnhancedKnowledgeGraph'
 import SimpleKnowledgeGraph from './components/SimpleKnowledgeGraph'
 import ErrorBoundary from './components/ErrorBoundary'
@@ -48,6 +48,7 @@ import StaticChatbox from './components/StaticChatbox'
 import GroupManagementAI from './components/GroupManagementAI'
 import SummarizationEngine from './components/SummarizationEngine'
 import SolarSystemBackground from './components/SolarSystemBackground'
+import SimpleChatBot from './components/SimpleChatBot'
 import './App.css'
 import './enhanced-animations.css'
 import './transparent-backgrounds.css'
@@ -56,6 +57,7 @@ import './unified-background.css'
 import './professional-modules.css'
 import './modern-overrides.css'
 import './premium-modules.css'
+import './premium-design-system.css'
 
 const App = () => {
   const [activeModule, setActiveModule] = useState('dashboard')
@@ -288,11 +290,8 @@ const App = () => {
   }, [])
 
   const addNotification = (notification) => {
-    const id = Date.now() + Math.random()
-    setNotifications(prev => [...prev, { ...notification, id }])
-    setTimeout(() => {
-      setNotifications(prev => prev.filter(n => n.id !== id))
-    }, 5000)
+    // Notifications disabled - components now handle their own feedback
+    console.log('Notification:', notification)
   }
 
   // Clear temporary memory on browser refresh
@@ -378,7 +377,7 @@ const App = () => {
       case 'embeddings':
         return <EnhancedEmbeddingGenerator {...moduleProps} onBack={() => setActiveModule('dashboard')} />
       case 'graph-constructor':
-        return <NewGraphConstructor {...moduleProps} onBack={() => setActiveModule('dashboard')} />
+        return <GraphConstructor {...moduleProps} onBack={() => setActiveModule('dashboard')} />
       case 'knowledge-graph':
         console.log('🎯 Rendering knowledge-graph module')
         return (
@@ -389,7 +388,7 @@ const App = () => {
       case 'agentic-retrieval':
         return <AgenticRetrieval {...moduleProps} onBack={() => setActiveModule('dashboard')} />
       case 'reasoning':
-        return <EnhancedReasoningBot {...moduleProps} onBack={() => setActiveModule('dashboard')} />
+        return <SimpleChatBot onBack={() => setActiveModule('dashboard')} />
       case 'chatbot':
         return <LyzrAIChatBot {...moduleProps} onBack={() => setActiveModule('dashboard')} />
       case 'file-processing':
@@ -512,10 +511,7 @@ const App = () => {
           </main>
         </div>
         
-        <EnhancedNotificationSystem 
-          notifications={notifications}
-          onRemove={(id) => setNotifications(prev => prev.filter(n => n.id !== id))}
-        />
+        {/* Notification system disabled - components handle their own feedback */}
 
         {/* Screen Blur Overlay with Circular Progress */}
         {isScreenBlurred && (
