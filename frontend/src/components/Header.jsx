@@ -34,23 +34,20 @@ const Header = ({ sidebarOpen, setSidebarOpen, activeModule, modules, onUploadCl
           </button>
           
           <div className="flex items-center space-x-4">
+            {/* Logo Section - Clean and Simple */}
             <div className="flex items-center space-x-3">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="w-12 h-12 bg-gradient-to-br from-purple-500 via-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg"
-              >
-                <Brain size={24} className="text-white" />
-              </motion.div>
-              <div className="flex flex-col">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  Agentic Graph RAG
-                </h1>
-                <div className="flex items-center space-x-1">
-                  <Sparkles size={12} className="text-yellow-400" />
-                  <p className="text-xs text-gray-300 font-medium">Powered by Lyzr.AI</p>
-                </div>
-              </div>
+              <h1 className="text-xl font-bold text-white">
+                Agentic Graph RAG
+              </h1>
+              <span className="text-sm text-gray-400 font-medium">
+                Powered by LYzr AI
+              </span>
+            </div>
+            
+            {/* Navigation Breadcrumb */}
+            <div className="flex items-center space-x-2 text-gray-400">
+              <span className="text-blue-400">⚡</span>
+              <span className="text-sm">Dashboard</span>
             </div>
           </div>
           
@@ -65,36 +62,19 @@ const Header = ({ sidebarOpen, setSidebarOpen, activeModule, modules, onUploadCl
         
         <div className="header-right">
           <div className="flex items-center space-x-4">
-            {/* File Management */}
-            {localStorage.getItem('documentsAvailable') === 'true' && (
-              <button
-                onClick={() => {
-                  localStorage.removeItem('uploadedFiles')
-                  localStorage.removeItem('documentsAvailable')
-                  // Clear all module data
-                  Object.keys(localStorage).forEach(key => {
-                    if (key.startsWith('moduleData_')) {
-                      localStorage.removeItem(key)
-                    }
-                  })
-                  window.location.reload()
-                }}
-                className="flex items-center space-x-2 px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-lg transition-all duration-200 border border-red-500/30"
-              >
-                <X size={14} />
-                <span className="text-sm font-medium">Clear Files</span>
-              </button>
-            )}
+            {/* Upload Button - Blue like in image */}
+            <button
+              onClick={onUploadClick}
+              className="flex items-center space-x-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium text-sm"
+            >
+              <Upload size={16} />
+              <span>Upload Files</span>
+            </button>
             
             {/* Backend Status */}
-            <div className="flex items-center space-x-2">
-              <div 
-                className={`w-2 h-2 rounded-full animate-pulse ${
-                  backendStatus === 'online' ? 'bg-green-400' : 
-                  backendStatus === 'offline' ? 'bg-red-400' : 'bg-yellow-400'
-                }`}
-              />
-              <span className={`text-sm font-medium ${
+            <div className="flex items-center space-x-2 text-sm">
+              <span className="text-gray-400">Backend</span>
+              <span className={`font-medium ${
                 backendStatus === 'online' ? 'text-green-400' : 
                 backendStatus === 'offline' ? 'text-red-400' : 'text-yellow-400'
               }`}>
@@ -102,21 +82,10 @@ const Header = ({ sidebarOpen, setSidebarOpen, activeModule, modules, onUploadCl
               </span>
             </div>
             
-            {/* Upload Button */}
-            <motion.button
-              onClick={onUploadClick}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl font-medium"
-            >
-              <Upload size={16} />
-              <span>Upload</span>
-            </motion.button>
-            
-            {/* Activity Indicator */}
-            <div className="w-8 h-8 bg-gray-800/50 hover:bg-gray-700/50 rounded-lg flex items-center justify-center transition-colors cursor-pointer">
-              <Activity size={16} className="text-gray-400 hover:text-white transition-colors" />
-            </div>
+            {/* Settings Icon */}
+            <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
+              <Activity size={16} />
+            </button>
           </div>
         </div>
       </div>
@@ -127,12 +96,11 @@ const Header = ({ sidebarOpen, setSidebarOpen, activeModule, modules, onUploadCl
           top: 0;
           left: 0;
           right: 0;
-          height: 80px;
-          background: linear-gradient(135deg, rgba(88, 28, 135, 0.95) 0%, rgba(30, 58, 138, 0.95) 50%, rgba(67, 56, 202, 0.95) 100%);
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+          height: 64px;
+          background: #1a1d29;
+          border-bottom: 1px solid #2d3748;
           z-index: 1000;
-          box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         .header-content {
