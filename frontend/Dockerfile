@@ -1,5 +1,5 @@
 # Multi-stage build for Agentic Graph RAG Frontend
-FROM node:18-alpine as base
+FROM node:18-alpine AS base
 
 # Set working directory
 WORKDIR /app
@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm ci --omit=dev && npm cache clean --force
 
 # Development stage
-FROM base as development
+FROM base AS development
 
 # Install all dependencies (including dev)
 RUN npm ci
@@ -26,7 +26,7 @@ EXPOSE 3000
 CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
 # Build stage
-FROM base as build
+FROM base AS build
 
 # Install all dependencies for building
 RUN npm ci
@@ -38,7 +38,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM nginx:alpine as production
+FROM nginx:alpine AS production
 
 # Install curl for health checks
 RUN apk add --no-cache curl
