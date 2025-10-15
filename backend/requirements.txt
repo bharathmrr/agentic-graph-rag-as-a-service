@@ -30,7 +30,7 @@ groq>=0.4.0,<1.0.0
 google-generativeai>=0.3.0,<1.0.0
 
 # LangChain - Latest compatible versions
-langchain
+langchain>=0.0.2
 langchain-community
 langchain-openai
 
@@ -45,7 +45,7 @@ pandas
 
 # NLP
 spacy
-nltk
+nltk>=3.8.0
 fuzzywuzzy>=0.18.0
 python-levenshtein>=0.23.0
 rapidfuzz>=3.5.0
