@@ -115,9 +115,7 @@ uploads/
 extracted_texts/
 
 # Docker
-Dockerfile*
 docker-compose*.yml
-.dockerignore
 
 # CI/CD
 .github/
