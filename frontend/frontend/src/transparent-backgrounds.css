@@ -1,0 +1,208 @@
+/* Transparent Backgrounds for All Components */
+
+/* Main App Background */
+.app {
+  background: transparent !important;
+}
+
+/* Module Cards */
+.module-card {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.module-card:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Dashboard Components */
+.dashboard-card {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Upload Components */
+.upload-container {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Knowledge Graph Components */
+.graph-container {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Chat Components */
+.chat-container {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Settings Components */
+.settings-panel {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Processing Status */
+.processing-status {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Notifications */
+.notification {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Headers and Navigation */
+.header {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Form Elements */
+.form-container {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-field {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.input-field:focus {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Buttons */
+.btn {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Modal and Overlay */
+.modal {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(5px);
+}
+
+/* Tables and Lists */
+.table {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.list-item {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Progress Bars */
+.progress-bar {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+  background: rgba(59, 130, 246, 0.3) !important;
+  backdrop-filter: blur(5px);
+}
+
+/* Tooltips */
+.tooltip {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Status Indicators */
+.status-indicator {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Charts and Graphs */
+.chart-container {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Code Blocks */
+.code-block {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Search Results */
+.search-result {
+  background: transparent !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Override any remaining solid backgrounds */
+* {
+  background-color: transparent !important;
+}
+
+/* Ensure text remains visible */
+.text-white {
+  color: #ffffff !important;
+}
+
+.text-gray-300 {
+  color: #d1d5db !important;
+}
+
+.text-gray-400 {
+  color: #9ca3af !important;
+}
+
+/* Glass morphism effect for all elements */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}

@@ -1,0 +1,41 @@
+# Groq Integration Requirements
+# Add these to your existing requirements.txt
+
+# Core Groq and LlamaIndex dependencies
+llama-index-core>=0.10.0
+llama-index-llms-groq>=0.1.0
+llama-index-embeddings-huggingface>=0.2.0
+
+# Additional LlamaIndex components
+llama-index-readers-file>=0.1.0
+llama-index-vector-stores-chroma>=0.1.0
+llama-index-postprocessor-flag-embedding-reranker>=0.1.0
+
+# HuggingFace and ML dependencies
+transformers>=4.35.0
+sentence-transformers>=2.2.2
+torch>=2.0.0
+tokenizers>=0.14.0
+
+# Groq API client
+groq>=0.4.0
+
+# Text processing and NLP
+spacy>=3.7.0
+nltk>=3.8.0
+
+# Performance and optimization
+accelerate>=0.24.0
+optimum>=1.14.0
+
+# Async and streaming support
+aiofiles>=23.2.0
+asyncio-mqtt>=0.13.0
+
+# Optional: GPU acceleration (uncomment if using CUDA)
+# torch-audio>=2.0.0
+# torchvision>=0.15.0
+
+# Development and testing
+pytest-asyncio>=0.21.0
+httpx>=0.25.0

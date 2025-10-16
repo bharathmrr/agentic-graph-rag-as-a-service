@@ -1,0 +1,101 @@
+{
+  "entities": [
+    {
+      "id": "entity_0",
+      "name": "John Smith",
+      "type": "Concept",
+      "description": "Extracted concept",
+      "attributes": {}
+    },
+    {
+      "id": "entity_1",
+      "name": "Person",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_2",
+      "name": "Organization",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_3",
+      "name": "Machine Learning",
+      "type": "Concept",
+      "description": "Extracted concept",
+      "attributes": {}
+    },
+    {
+      "id": "entity_4",
+      "name": "Concept",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_5",
+      "name": "San Francisco",
+      "type": "Concept",
+      "description": "Extracted concept",
+      "attributes": {}
+    },
+    {
+      "id": "entity_6",
+      "name": "Location",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_7",
+      "name": "Agentic Graph",
+      "type": "Concept",
+      "description": "Extracted concept",
+      "attributes": {}
+    },
+    {
+      "id": "entity_8",
+      "name": "Technology",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    },
+    {
+      "id": "entity_9",
+      "name": "Upload",
+      "type": "Unknown",
+      "description": "Extracted unknown",
+      "attributes": {}
+    }
+  ],
+  "relationships": [
+    {
+      "source": "John Smith",
+      "target": "Person",
+      "type": "RELATED_TO",
+      "properties": {
+        "context": "extracted relationship"
+      }
+    },
+    {
+      "source": "Person",
+      "target": "Organization",
+      "type": "RELATED_TO",
+      "properties": {
+        "context": "extracted relationship"
+      }
+    },
+    {
+      "source": "Organization",
+      "target": "Machine Learning",
+      "type": "RELATED_TO",
+      "properties": {
+        "context": "extracted relationship"
+      }
+    }
+  ],
+  "hierarchies": []
+}
