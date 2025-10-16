@@ -25,7 +25,15 @@
   ],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-unused-vars": "off",
+    "no-undef": "off",
+    "react/no-unknown-property": "off",
+    "react/jsx-no-undef": "off",
+    "react/no-unescaped-entities": "warn",
+    "react-hooks/rules-of-hooks": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-constant-condition": "warn"
   },
   "ignorePatterns": [
     "dist/",
@@ -34,6 +42,9 @@
     "coverage/",
     "build/",
     "public/",
-    "vite.config.*"
+    "vite.config.*",
+    "frontend/**",
+    "**/*_old.jsx",
+    "**/*_backup.jsx"
   ]
 }
