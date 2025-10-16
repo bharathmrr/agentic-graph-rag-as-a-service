@@ -657,7 +657,7 @@ const ResultCard = ({ title, data, type }) => {
     }
 
     switch (type) {
-      case 'ontology':
+      case 'ontology': {
         const ontology = data.ontology || data.result?.ontology
         return (
           <div className="ontology-content">
@@ -688,8 +688,9 @@ const ResultCard = ({ title, data, type }) => {
             )}
           </div>
         )
+      }
 
-      case 'entities':
+      case 'entities': {
         const entities = data.entities || data.result?.entities || []
         return (
           <div className="entities-content">
@@ -715,8 +716,9 @@ const ResultCard = ({ title, data, type }) => {
             )}
           </div>
         )
+      }
 
-      case 'embeddings':
+      case 'embeddings': {
         const embeddings = data.embeddings || data.result?.embeddings || []
         return (
           <div className="embeddings-content">
@@ -732,8 +734,9 @@ const ResultCard = ({ title, data, type }) => {
             </div>
           </div>
         )
+      }
 
-      case 'graph':
+      case 'graph': {
         const graph = data.graph || data.result?.graph
         return (
           <div className="graph-content">
@@ -749,6 +752,7 @@ const ResultCard = ({ title, data, type }) => {
             </div>
           </div>
         )
+      }
 
       default:
         return <div className="text-gray-400">No data available</div>
