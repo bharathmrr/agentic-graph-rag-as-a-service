@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:debug": "vite build --debug",
     "lint": "eslint src --ext js,jsx",
     "preview": "vite preview",
     "test": "echo \"Frontend tests passed\" && exit 0",
-    "test:coverage": "echo \"No coverage configured\" && exit 0"
+    "test:coverage": "echo \"No coverage configured\" && exit 0",
+    "clean": "rimraf node_modules package-lock.json dist",
+    "fresh-install": "npm run clean && npm cache clean --force && npm install"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -31,6 +34,8 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
-    "vite": "^5.0.0"
+    "rimraf": "^5.0.5",
+    "vite": "^5.0.8",
+    "rollup": "^4.9.0"
   }
 }
