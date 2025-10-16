@@ -1,4 +1,4 @@
-name: 🚀 Agentic Graph CI/CD Pipeline
+name: 🚀 Agentic Graph RAG CI/CD Pipeline
 
 on:
   push:
@@ -8,14 +8,17 @@ on:
   release:
     types: [ published ]
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   # =========================
-  # 🧪 Backend Testing
+  # 🧪 Backend Testing and Linting
   # =========================
   backend-test:
     name: 🧪 Backend Tests
     runs-on: ubuntu-latest
-
     services:
       neo4j:
         image: neo4j:5.15
@@ -67,7 +70,7 @@ jobs:
           echo "Backend tests completed successfully"
 
   # =========================
-  # 🎨 Frontend Testing
+  # 🎨 Frontend Testing and Building
   # =========================
   frontend-test:
     name: 🎨 Frontend Tests
