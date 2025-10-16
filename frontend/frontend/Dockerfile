@@ -1,38 +1,41 @@
-# ============================
-# Stage 1: Base Dependencies
-# ============================
-FROM node:18-alpine AS base
+# =====================
+# Stage 1: Build
+# =====================
+FROM node:18-bullseye AS build
+
 WORKDIR /app
 
-# Copy package files first for caching
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install --no-optional --legacy-peer-deps
+# Install all dependencies including devDependencies
+RUN npm ci
 
-# Copy the rest of the source code
+# Copy all frontend files
 COPY . .
 
-# ============================
-# Stage 2: Skip Build Step (safe mode)
-# ============================
-RUN echo "Skipping 'npm run build' during Docker build to prevent CI/CD errors"
+# Rebuild native modules (fix rollup optional dependency issue)
+RUN npm rebuild
 
-# ============================
-# Stage 3: Production
-# ============================
-FROM node:18-alpine AS production
+# Build the frontend
+RUN npm run build
+
+# =====================
+# Stage 2: Production
+# =====================
+FROM node:18-bullseye-slim AS production
+
 WORKDIR /app
 
-# Copy files from base image
-COPY --from=base /app /app
+# Copy only build output
+COPY --from=build /app/dist ./dist
+COPY package*.json ./
 
-# Set environment variables
-ENV NODE_ENV=production
-ENV PORT=3000
+# Install only production dependencies
+RUN npm ci --omit=dev
 
 # Expose port
 EXPOSE 3000
 
-# Start app
-CMD ["npm", "start"]
+# Start app (or serve static files if SPA)
+CMD ["npx", "serve", "-s", "dist", "-l", "3000"]
