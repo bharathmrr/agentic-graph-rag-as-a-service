@@ -240,4 +240,3 @@ jobs:
       - name: ❌ Notify on failure
         if: ${{ needs.deploy-staging.result == 'failure' || needs.deploy-production.result == 'failure' }}
         run: echo "❌ Deployment failed!"
-
