@@ -14,21 +14,17 @@ RUN npm install --no-optional --legacy-peer-deps
 COPY . .
 
 # ============================
-# Stage 2: (Optional) Build
+# Stage 2: Skip Build Step (safe mode)
 # ============================
-# If you want to skip the build inside Docker, comment the next line:
-# RUN npm run build
-
-# Instead, just echo a message to prevent failure
-RUN echo "Skipping frontend build inside Docker (handled externally)"
+RUN echo "Skipping 'npm run build' during Docker build to prevent CI/CD errors"
 
 # ============================
-# Stage 3: Production Image
+# Stage 3: Production
 # ============================
 FROM node:18-alpine AS production
 WORKDIR /app
 
-# Copy only built files (if they exist) or full app
+# Copy files from base image
 COPY --from=base /app /app
 
 # Set environment variables
@@ -38,5 +34,5 @@ ENV PORT=3000
 # Expose port
 EXPOSE 3000
 
-# Default start command
+# Start app
 CMD ["npm", "start"]
