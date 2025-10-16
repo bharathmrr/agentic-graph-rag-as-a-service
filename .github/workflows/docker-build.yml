@@ -124,11 +124,11 @@ jobs:
     - name: 🔍 Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.component }}:${{ github.sha }}
+        image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.component }}:${{ github.ref_name }}
         format: 'sarif'
         output: 'trivy-results-${{ matrix.component }}.sarif'
 
     - name: 📊 Upload Trivy scan results
-      uses: github/codeql-action/upload-sarif@v2
+      uses: github/codeql-action/upload-sarif@v3
       with:
         sarif_file: 'trivy-results-${{ matrix.component }}.sarif'
