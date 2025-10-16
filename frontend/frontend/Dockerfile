@@ -1,41 +1,30 @@
-# =====================
-# Stage 1: Build
-# =====================
-FROM node:18-bullseye AS build
-
+# =========================
+# Stage 1: Base Dependencies
+# =========================
+FROM python:3.9-slim AS base
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy requirements first for caching
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install all dependencies including devDependencies
-RUN npm ci
-
-# Copy all frontend files
+# Copy rest of the backend code
 COPY . .
 
-# Rebuild native modules (fix rollup optional dependency issue)
-RUN npm rebuild
-
-# Build the frontend
-RUN npm run build
-
-# =====================
+# =========================
 # Stage 2: Production
-# =====================
-FROM node:18-bullseye-slim AS production
-
+# =========================
+FROM python:3.9-slim AS production
 WORKDIR /app
 
-# Copy only build output
-COPY --from=build /app/dist ./dist
-COPY package*.json ./
+# Copy installed packages and source code
+COPY --from=base /app /app
 
-# Install only production dependencies
-RUN npm ci --omit=dev
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
 
 # Expose port
-EXPOSE 3000
+EXPOSE 8000
 
-# Start app (or serve static files if SPA)
-CMD ["npx", "serve", "-s", "dist", "-l", "3000"]
+# Command to run the backend
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
