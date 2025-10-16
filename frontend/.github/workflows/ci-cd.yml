@@ -91,9 +91,10 @@ jobs:
       with:
         node-version: '18'
 
-    - name: 📦 Install dependencies
+    - name: 📦 Clean install deps (workaround Rollup optional deps bug)
       run: |
         cd frontend
+        rm -rf node_modules package-lock.json
         npm install
 
     - name: 🎨 Lint code
